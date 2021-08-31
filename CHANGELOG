@@ -1,0 +1,51 @@
+0.0.1 (08/30/2021 - 18:52:52)
+-----------------------------
+- Initial commit
+
+0.0.2 (08/30/2021 - 18:57:44)
+-----------------------------
+- Add basic way to get details from `git log`
+
+0.0.3 (08/30/2021 - 21:57:30)
+-----------------------------
+- Get content required for a CHANGELOG
+
+0.0.4 (08/30/2021 - 22:06:24)
+-----------------------------
+- Add version numbers for each change
+- Rename variable names
+
+0.0.5 (08/30/2021 - 22:09:10)
+-----------------------------
+- Get the number of commits automatically
+- Add three digit version numbers
+
+0.0.6 (08/30/2021 - 22:26:07)
+-----------------------------
+- Wrap everything inside a class
+- Print run time at the end
+
+0.0.7 (08/30/2021 - 22:45:15)
+-----------------------------
+- Get the commit info from the trunk branch
+- Add a destructor method
+- Add docstrings
+
+0.0.8 (08/30/2021 - 22:50:04)
+-----------------------------
+- Add pre-commit for linting, isort and flake8
+
+0.0.9 (08/30/2021 - 23:07:49)
+-----------------------------
+- Add sphinx documentation
+- README markdown and __init__ support for sphinx documentation
+- Create gen_docs.sh
+- Hook up the doc generation process to pre-commit
+
+0.1.0 (08/30/2021 - 23:17:14)
+-----------------------------
+- onboard docs.yml but only prints a statement
+
+0.1.1 (08/30/2021 - 23:24:27)
+-----------------------------
+- auto upload to pypi when tagged a release version

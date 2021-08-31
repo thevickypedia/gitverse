@@ -49,3 +49,13 @@
 0.1.1 (08/30/2021 - 23:24:27)
 -----------------------------
 - auto upload to pypi when tagged a release version
+
+0.1.2 (08/30/2021 - 23:59:10)
+-----------------------------
+- Create a pypi package
+- Move generator.py within a source directory
+- Add __init__.py, CHANGELOT, LICENSE, MANIFEST.in, setup.cfg, setup.py, version.py
+
+0.1.3 (08/31/2021 - 00:02:16)
+-----------------------------
+- revert change on python-publish.yml

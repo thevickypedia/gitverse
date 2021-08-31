@@ -1,7 +1,19 @@
+import logging
 from datetime import datetime
+from importlib import reload
 from os import path, remove, system
+from pathlib import PurePath
 from subprocess import check_output
 from time import perf_counter
+from typing import Union
+
+reload(logging)
+logging.basicConfig(
+    format='%(asctime)s - %(levelname)s - [%(module)s:%(lineno)d] - %(funcName)s - %(message)s',
+    datefmt='%b-%d-%Y %I:%M:%S %p'
+)
+logger = logging.getLogger(PurePath(__file__).stem)
+logger.setLevel(logging.INFO)
 
 
 class Generator:
@@ -18,24 +30,25 @@ class Generator:
         """Instantiates the Generator object.
 
         - Checks if trunk branch has ``master`` or ``main`` and gets the commit information from the trunk branch.
-        - If number of commits are more than 999, exits with an UNSUPPORTED message.
-            - That's because 4 digit version numbers don't look good IMO.
         - Stores the output of ``git log`` to a ``source_change_log.txt`` file.
         - Removes ``CHANGELOG`` if a previous version is available.
             - Older versions are not required, since ``git log`` captures all the commits anyway.
         """
         branches = check_output("git branch", shell=True).decode('utf-8').replace('* ', '').strip().split('\n')
         self.trunk = 'main' if 'main' in branches else 'master'
+        logger.info(f'Identified trunk branch to be {self.trunk}')
         self.source = 'source_change_log.txt'
         self.change = 'CHANGELOG'
+        logger.info('Writing git log into a temp file.')
         system(f'git log --reverse > {self.source}')
         if path.isfile(self.change):
             remove(self.change)
 
     def __del__(self):
         """Removes the source file as it is temporary and prints the run time."""
+        logger.info('Removing temp file.')
         remove(self.source)
-        print(f'CHANGELOG was created in: {round(float(perf_counter()), 2)}s')
+        logger.info(f'CHANGELOG was created in: {round(float(perf_counter()), 2)}s')
 
     def get_commits(self) -> int:
         """Scans for the number of commits in the ``trunk`` branch.
@@ -45,11 +58,10 @@ class Generator:
             Number of commits.
         """
         commits = int(check_output(f"git rev-list --count {self.trunk}", shell=True).decode('utf-8').split('\n')[0])
-        if commits > 999:
-            exit('Supports only up to 3 digit version numbers. Update the loop below to generate 4 digit versions.')
+        logger.info(f'Number of commits: {commits}')
         return commits
 
-    def versions(self) -> list:
+    def versions(self) -> Union[list, None]:
         """Generates a list of versions based on the number of commits in master branch.
 
         Examples:
@@ -70,6 +82,12 @@ class Generator:
                 version_info.append(f'0.{version[0]}.{version[1]}')
             elif len(version) == 3:
                 version_info.append(f'{version[0]}.{version[1]}.{version[2]}')
+            elif len(version) == 4:
+                version_info.append(f'{version[0]}.{version[1]}.{version[2]}.{version[3]}')
+            elif len(version) == 5:
+                version_info.append(f'{version[0]}.{version[1]}.{version[2]}.{version[3]}.{version[4]}')
+            elif len(version) == 6:
+                version_info.append(f'{version[0]}.{version[1]}.{version[2]}.{version[3]}.{version[4]}.{version[5]}')
         return version_info
 
     def get_source(self) -> list:
@@ -95,7 +113,9 @@ class Generator:
         See Also:
             - Destructor ``__del__`` method executes upon exit which deletes the ``source_change_log.txt`` file.
         """
+        versions = self.versions()
         log = self.get_source()
+        logger.info('Generating CHANGELOG')
         iterator = 0
         with open(self.change, 'a') as file:
             for index, element in enumerate(log):
@@ -105,7 +125,7 @@ class Generator:
                         ind = log.index(element)
                         element = ' '.join(element.lstrip('Date:').strip().split()[0:-1])
                         datetime_obj = datetime.strptime(element, "%a %b %d %H:%M:%S %Y")
-                        element = f'{self.versions()[iterator]} ({datetime_obj.strftime("%m/%d/%Y - %H:%M:%S")})'
+                        element = f'{versions[iterator]} ({datetime_obj.strftime("%m/%d/%Y - %H:%M:%S")})'
                         iterator += 1
                         log[ind + 1] = '-' * len(element)
                         # log.pop(ind + 1)  # Use this to leave a blank line instead of '----'

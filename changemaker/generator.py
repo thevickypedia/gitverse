@@ -33,8 +33,23 @@ class Generator:
             remove(self.change)
 
     def __del__(self):
-        """Removes the source file as it is temporary and prints the run time."""
+        """Removes the source file as it is temporary and prints the run time.
+
+        Cleans up the CHANGELOG after creation, which is to remove the commits that say Update `CHANGELOG`.
+        """
         remove(self.source)
+        with open(self.change) as file:
+            req_list = file.read().splitlines()
+        for index, element in enumerate(req_list):
+            if element == '- Update CHANGELOG':
+                req_list.pop(index)
+                req_list.pop(index - 1)
+                req_list.pop(index - 2)
+                req_list.pop(index - 3)
+        req_list = req_list[0:-1]
+        with open(self.change, 'w') as file:
+            for element in req_list:
+                file.write(element + '\n')
         print(f'Run Time: {round(float(perf_counter()), 2)}s')
 
     def get_commits(self) -> int:
@@ -53,9 +68,9 @@ class Generator:
         """Generates a list of versions based on the number of commits in master branch.
 
         Examples:
-            7th commit in the branch becomes version 0.0.7
-            37th commit becomes 0.3.7
-            451st commit becomes 4.5.1
+            - 7th commit in the branch becomes version 0.0.7
+            - 37th commit becomes 0.3.7
+            - 451st commit becomes 4.5.1
 
         Returns:
             list:

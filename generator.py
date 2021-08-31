@@ -11,7 +11,7 @@ class Generator:
 
     See Also:
         Pre-requisite:
-        - ``git`` command should be working in CLI.
+            - ``git`` command should be working in CLI.
     """
 
     def __init__(self):

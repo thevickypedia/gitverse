@@ -1,5 +1,5 @@
 from datetime import datetime
-from os import path, system, remove
+from os import path, remove, system
 from subprocess import check_output
 from time import perf_counter
 

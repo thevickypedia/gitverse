@@ -30,6 +30,6 @@ setup(
     License='MIT',
     classifiers=classifiers,
     keywords='changelog, commits, automate',
-    packages=['.changemaker'],
+    packages=['changemaker.py'],
     install_requires=['']
 )

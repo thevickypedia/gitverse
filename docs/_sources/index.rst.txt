@@ -15,7 +15,7 @@ Welcome to Changelog Generator's documentation!
 CHANGELOG Generator
 ===================
 
-.. automodule:: generator
+.. automodule:: changemaker
    :members:
    :undoc-members:
 

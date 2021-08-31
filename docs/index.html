@@ -46,15 +46,22 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Read Me:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="README.html">CHANGELOG generator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="README.html">CHANGELOG generator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="README.html#pypi-module">Pypi Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#pre-commit">Pre-Commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#runbook">Runbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#license-copyright">License &amp; copyright</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
-<section id="module-generator">
-<span id="changelog-generator"></span><h1>CHANGELOG Generator<a class="headerlink" href="#module-generator" title="Permalink to this headline">¶</a></h1>
+<section id="module-changemaker">
+<span id="changelog-generator"></span><h1>CHANGELOG Generator<a class="headerlink" href="#module-changemaker" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="generator.Generator">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">Generator</span></span><a class="headerlink" href="#generator.Generator" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="changemaker.Generator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">changemaker.</span></span><span class="sig-name descname"><span class="pre">Generator</span></span><a class="headerlink" href="#changemaker.Generator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initiates Generator object to generate <code class="docutils literal notranslate"><span class="pre">CHANGELOG</span></code> from output of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Generator</span>
 </pre></div>
@@ -88,8 +95,8 @@
 </li>
 </ul>
 <dl class="py method">
-<dt class="sig sig-object py" id="generator.Generator.get_commits">
-<span class="sig-name descname"><span class="pre">get_commits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#generator.Generator.get_commits" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="changemaker.Generator.get_commits">
+<span class="sig-name descname"><span class="pre">get_commits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#changemaker.Generator.get_commits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Scans for the number of commits in the <code class="docutils literal notranslate"><span class="pre">trunk</span></code> branch.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -102,8 +109,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="generator.Generator.get_source">
-<span class="sig-name descname"><span class="pre">get_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#generator.Generator.get_source" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="changemaker.Generator.get_source">
+<span class="sig-name descname"><span class="pre">get_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#changemaker.Generator.get_source" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the source file and splits it by lines to return it as a list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -116,8 +123,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="generator.Generator.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generator.Generator.run" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="changemaker.Generator.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#changemaker.Generator.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Triggers the conversion process.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -131,13 +138,15 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="generator.Generator.versions">
-<span class="sig-name descname"><span class="pre">versions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#generator.Generator.versions" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="changemaker.Generator.versions">
+<span class="sig-name descname"><span class="pre">versions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#changemaker.Generator.versions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a list of versions based on the number of commits in master branch.</p>
 <p class="rubric">Examples</p>
-<p>7th commit in the branch becomes version 0.0.7
-37th commit becomes 0.3.7
-451st commit becomes 4.5.1</p>
+<ul class="simple">
+<li><p>7th commit in the branch becomes version 0.0.7</p></li>
+<li><p>37th commit becomes 0.3.7</p></li>
+<li><p>451st commit becomes 4.5.1</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>List of versions generated by the number of commit (not commit sha).</p>
@@ -170,7 +179,7 @@
   <h3><a href="#">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Welcome to Changelog Generator’s documentation!</a></li>
-<li><a class="reference internal" href="#module-generator">CHANGELOG Generator</a></li>
+<li><a class="reference internal" href="#module-changemaker">CHANGELOG Generator</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 

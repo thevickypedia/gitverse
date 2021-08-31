@@ -21,8 +21,11 @@ Generate CHANGELOG from git commit history
 ### Usage
 `pip install changelog-generator`
 
+###### Navigate to the repository, launch a scratch file and run:
 ```python
+from changemaker.generator import Generator
 
+Generator().run()
 ```
 
 ### Pre-Commit

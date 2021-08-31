@@ -64,8 +64,13 @@
 -----------------------------
 - auto upload to pypi when tagged a release version
 
-0.1.5 (08/31/2021 - 01:27:17)
+0.1.5 (08/31/2021 - 01:22:22)
 -----------------------------
 - Alter time counter in destructor method
 - Update README.md, .gitignore, CHANGELOG
 - Bump version
+
+0.1.6 (08/31/2021 - 01:30:23)
+-----------------------------
+- Update sample code in README.md
+- Bump version to 0.1.6

@@ -78,3 +78,9 @@
 0.1.7 (08/31/2021 - 01:35:09)
 -----------------------------
 - bump version to run build
+
+0.1.8 (08/31/2021 - 07:56:10)
+-----------------------------
+- Support up to 6 digit version numbers
+- Fix versions() getting called repeatedly
+- Add logger info

@@ -45,6 +45,7 @@ class Generator:
                 req_list.pop(index)
                 req_list.pop(index - 1)
                 req_list.pop(index - 2)
+                req_list.pop(index - 3)
         req_list = req_list[0:-1]
         with open(self.change, 'w') as file:
             for element in req_list:

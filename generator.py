@@ -1,13 +1,18 @@
 from datetime import datetime
 from os import path, system
+from subprocess import check_output
+
+commits = int(check_output("git rev-list --count master", shell=True).decode('utf-8').split('\n')[0])
 
 versions = []
-for n in range(1, 10):
+for n in range(1, commits + 1):
     ver = str(n)
     if len(ver) == 1:
-        versions.append(f'0.{ver}')
+        versions.append(f'0.0.{ver}')
     elif len(ver) == 2:
-        versions.append(f'{ver[0]}.{ver[1]}')
+        versions.append(f'0.{ver[0]}.{ver[1]}')
+    elif len(ver) == 3:
+        versions.append(f'{ver[0]}.{ver[1]}.{ver[2]}')
 
 system('git log --reverse > source_change_log.txt')
 

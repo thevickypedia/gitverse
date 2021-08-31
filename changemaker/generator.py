@@ -35,7 +35,7 @@ class Generator:
     def __del__(self):
         """Removes the source file as it is temporary and prints the run time."""
         remove(self.source)
-        print(f'Run Time: {round(float(perf_counter()), 2)}s')
+        print(f'CHANGELOG was created in: {round(float(perf_counter()), 2)}s')
 
     def get_commits(self) -> int:
         """Scans for the number of commits in the ``trunk`` branch.
@@ -53,9 +53,9 @@ class Generator:
         """Generates a list of versions based on the number of commits in master branch.
 
         Examples:
-            7th commit in the branch becomes version 0.0.7
-            37th commit becomes 0.3.7
-            451st commit becomes 4.5.1
+            - 7th commit in the branch becomes version 0.0.7
+            - 37th commit becomes 0.3.7
+            - 451st commit becomes 4.5.1
 
         Returns:
             list:
@@ -86,11 +86,14 @@ class Generator:
     def run(self) -> None:
         """Triggers the conversion process.
 
-        See Also:
+        Notes:
             - Calls the ``get_source()`` method.
             - Ignores lines containing commit sha and Author information.
             - Converts git datetime into a different format.
             - Adds ``-`` in front of the lines in description for all changes.
+
+        See Also:
+            - Destructor ``__del__`` method executes upon exit which deletes the ``source_change_log.txt`` file.
         """
         log = self.get_source()
         iterator = 0

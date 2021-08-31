@@ -125,7 +125,7 @@ class Generator:
                         ind = log.index(element)
                         element = ' '.join(element.lstrip('Date:').strip().split()[0:-1])
                         datetime_obj = datetime.strptime(element, "%a %b %d %H:%M:%S %Y")
-                        element = f'{versions[iterator]} ({datetime_obj.strftime("%m/%d/%Y - %H:%M:%S")})'
+                        element = f'{versions[iterator]} ({datetime_obj.strftime("%m/%d/%Y")})'
                         iterator += 1
                         log[ind + 1] = '-' * len(element)
                         # log.pop(ind + 1)  # Use this to leave a blank line instead of '----'

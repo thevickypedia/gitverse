@@ -118,6 +118,7 @@ class Generator:
         logger.info('Generating CHANGELOG')
         iterator = 0
         with open(self.change, 'a') as file:
+            file.write('Change Log\n\n')
             for index, element in enumerate(log):
                 element = element.strip()
                 if not element.startswith('commit') and not element.startswith('Author'):

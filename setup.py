@@ -36,5 +36,10 @@ setup(
             'console_scripts': [
                 'changelog = changemaker.generator:main'
             ]
+    },
+    project_urls={
+        'Source': 'https://github.com/thevickypedia/changelog-generator',
+        'Docs': 'https://thevickypedia.github.io/changelog-generator',
+        'Tracker': 'https://github.com/thevickypedia/changelog-generator/issues'
     }
 )

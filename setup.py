@@ -31,5 +31,10 @@ setup(
     classifiers=classifiers,
     keywords='changelog, commits, automate',
     packages=['.changemaker'],
-    install_requires=['']
+    install_requires=['click'],
+    entry_points={
+            'console_scripts': [
+                'changelog = changemaker.generator:main'
+            ]
+    }
 )

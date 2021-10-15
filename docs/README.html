@@ -60,12 +60,12 @@
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">changelog-generator</span></code></p>
-<section id="navigate-to-the-repository-launch-a-scratch-file-and-run">
-<h3>Navigate to the repository, launch a scratch file and run:<a class="headerlink" href="#navigate-to-the-repository-launch-a-scratch-file-and-run" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">changemaker.generator</span> <span class="kn">import</span> <span class="n">Generator</span>
-
-<span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<section id="navigate-to-the-repository-and-run">
+<h3>Navigate to the repository and run:<a class="headerlink" href="#navigate-to-the-repository-and-run" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install changelog-generator
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>changelog
 </pre></div>
 </div>
 </section>
@@ -73,12 +73,12 @@
 <section id="pre-commit">
 <h2>Pre-Commit<a class="headerlink" href="#pre-commit" title="Permalink to this headline">¶</a></h2>
 <p>Install <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> to run <code class="docutils literal notranslate"><span class="pre">flake8</span></code> and <code class="docutils literal notranslate"><span class="pre">isort</span></code> for linting and <code class="docutils literal notranslate"><span class="pre">sphinx</span></code> for documentation generator.</p>
-<p><code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">pre-commit</span> <span class="pre">sphinx</span> <span class="pre">recommonmark</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--no-cache</span> <span class="pre">--upgrade</span> <span class="pre">sphinx</span> <span class="pre">pre-commit</span> <span class="pre">recommonmark</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">run</span> <span class="pre">--all-files</span></code></p>
 </section>
 <section id="runbook">
 <h2>Runbook<a class="headerlink" href="#runbook" title="Permalink to this headline">¶</a></h2>
-<p>https://thevickypedia.github.io/changelog-generator/</p>
+<p><a class="reference external" href="https://thevickypedia.github.io/changelog-generator/">GitHub Docs</a></p>
 </section>
 <section id="license-copyright">
 <h2>License &amp; copyright<a class="headerlink" href="#license-copyright" title="Permalink to this headline">¶</a></h2>
@@ -99,7 +99,7 @@
 <li><a class="reference internal" href="#">CHANGELOG generator</a><ul>
 <li><a class="reference internal" href="#pypi-module">Pypi Module</a></li>
 <li><a class="reference internal" href="#usage">Usage</a><ul>
-<li><a class="reference internal" href="#navigate-to-the-repository-launch-a-scratch-file-and-run">Navigate to the repository, launch a scratch file and run:</a></li>
+<li><a class="reference internal" href="#navigate-to-the-repository-and-run">Navigate to the repository and run:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#pre-commit">Pre-Commit</a></li>
@@ -151,7 +151,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Vignesh Sivanandha Rao.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
     </div>
   </body>
 </html>

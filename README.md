@@ -19,24 +19,24 @@ Generate CHANGELOG from git commit history
 [https://pypi.org/project/changelog-generator/](https://pypi.org/project/changelog-generator/)
 
 ### Usage
-`pip install changelog-generator`
+###### Navigate to the repository and run:
+```shell
+pip install changelog-generator
+```
 
-###### Navigate to the repository, launch a scratch file and run:
-```python
-from changemaker.generator import Generator
-
-Generator().run()
+```shell
+changelog
 ```
 
 ### Pre-Commit
 Install `pre-commit` to run `flake8` and `isort` for linting and `sphinx` for documentation generator.
 
-`pip3 install pre-commit sphinx recommonmark`
+`pip install --no-cache --upgrade sphinx pre-commit recommonmark`
 
 `pre-commit run --all-files`
 
 ### Runbook
-https://thevickypedia.github.io/changelog-generator/
+[GitHub Docs](https://thevickypedia.github.io/changelog-generator/)
 
 ## License & copyright
 

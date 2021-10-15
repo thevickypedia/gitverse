@@ -7,13 +7,7 @@ from subprocess import check_output
 from time import perf_counter
 from typing import Union
 
-reload(logging)
-logging.basicConfig(
-    format='%(asctime)s - %(levelname)s - [%(module)s:%(lineno)d] - %(funcName)s - %(message)s',
-    datefmt='%b-%d-%Y %I:%M:%S %p'
-)
-logger = logging.getLogger(PurePath(__file__).stem)
-logger.setLevel(logging.INFO)
+from click import command, pass_context
 
 
 class Generator:
@@ -34,21 +28,28 @@ class Generator:
         - Removes ``CHANGELOG`` if a previous version is available.
             - Older versions are not required, since ``git log`` captures all the commits anyway.
         """
+        reload(logging)
+        logging.basicConfig(
+            format='%(asctime)s - %(levelname)s - [%(module)s:%(lineno)d] - %(funcName)s - %(message)s',
+            datefmt='%b-%d-%Y %I:%M:%S %p'
+        )
+        self.logger = logging.getLogger(PurePath(__file__).stem)
+        self.logger.setLevel(logging.INFO)
         branches = check_output("git branch", shell=True).decode('utf-8').replace('* ', '').strip().split('\n')
         self.trunk = 'main' if 'main' in branches else 'master'
-        logger.info(f'Identified trunk branch to be {self.trunk}')
+        self.logger.info(f'Identified trunk branch to be {self.trunk}')
         self.source = 'source_change_log.txt'
         self.change = 'CHANGELOG'
-        logger.info('Writing git log into a temp file.')
+        self.logger.info('Writing git log into a temp file.')
         system(f'git log --reverse > {self.source}')
         if path.isfile(self.change):
             remove(self.change)
 
     def __del__(self):
         """Removes the source file as it is temporary and prints the run time."""
-        logger.info('Removing temp file.')
+        self.logger.info('Removing temp file.')
         remove(self.source)
-        logger.info(f'CHANGELOG was created in: {round(float(perf_counter()), 2)}s')
+        self.logger.info(f'CHANGELOG was created in: {round(float(perf_counter()), 2)}s')
 
     def get_commits(self) -> int:
         """Scans for the number of commits in the ``trunk`` branch.
@@ -58,7 +59,7 @@ class Generator:
             Number of commits.
         """
         commits = int(check_output(f"git rev-list --count {self.trunk}", shell=True).decode('utf-8').split('\n')[0])
-        logger.info(f'Number of commits: {commits}')
+        self.logger.info(f'Number of commits: {commits}')
         return commits
 
     def versions(self) -> Union[list, None]:
@@ -115,7 +116,7 @@ class Generator:
         """
         versions = self.versions()
         log = self.get_source()
-        logger.info('Generating CHANGELOG')
+        self.logger.info('Generating CHANGELOG')
         iterator = 0
         with open(self.change, 'a') as file:
             file.write('Change Log\n==========\n\n')
@@ -138,5 +139,12 @@ class Generator:
                     file.write(element + '\n')
 
 
-if __name__ == '__main__':
+@command()
+@pass_context
+def main(*args):
+    """Generate change log file."""
     Generator().run()
+
+
+if __name__ == '__main__':
+    main()

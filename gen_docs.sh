@@ -3,6 +3,7 @@
 # This is the opposite of the default shell behaviour, which is to ignore errors in scripts.
 set -e
 rm -rf docs
+mkdir -p doc_generator/_static
 mkdir docs
 cp README.md doc_generator && cd doc_generator && make clean html && mv _build/html/* ../docs && rm README.md
 touch ../docs/.nojekyll

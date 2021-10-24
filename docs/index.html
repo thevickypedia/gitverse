@@ -88,6 +88,33 @@
 </li>
 </ul>
 <dl class="py method">
+<dt class="sig sig-object py" id="generator.Generator.generator">
+<span class="sig-name descname"><span class="pre">generator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#generator.Generator.generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Triggers the conversion process.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Calls the <code class="docutils literal notranslate"><span class="pre">get_source()</span></code> method.</p></li>
+<li><p>Ignores lines containing commit sha and Author information.</p></li>
+<li><p>Converts git datetime into a different format.</p></li>
+<li><p>Adds <code class="docutils literal notranslate"><span class="pre">-</span></code> in front of the lines in description for all changes.</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p>Destructor <code class="docutils literal notranslate"><span class="pre">__del__</span></code> method executes upon exit which deletes the <code class="docutils literal notranslate"><span class="pre">source_change_log.txt</span></code> file.</p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of snippets that has to be written to <code class="docutils literal notranslate"><span class="pre">CHANGELOG</span></code> file.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="generator.Generator.get_commits">
 <span class="sig-name descname"><span class="pre">get_commits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#generator.Generator.get_commits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Scans for the number of commits in the <code class="docutils literal notranslate"><span class="pre">trunk</span></code> branch.</p>
@@ -117,21 +144,13 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="generator.Generator.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#generator.Generator.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Triggers the conversion process.</p>
-<p class="rubric">Notes</p>
-<ul class="simple">
-<li><p>Calls the <code class="docutils literal notranslate"><span class="pre">get_source()</span></code> method.</p></li>
-<li><p>Ignores lines containing commit sha and Author information.</p></li>
-<li><p>Converts git datetime into a different format.</p></li>
-<li><p>Adds <code class="docutils literal notranslate"><span class="pre">-</span></code> in front of the lines in description for all changes.</p></li>
-</ul>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p>Destructor <code class="docutils literal notranslate"><span class="pre">__del__</span></code> method executes upon exit which deletes the <code class="docutils literal notranslate"><span class="pre">source_change_log.txt</span></code> file.</p></li>
-</ul>
-</div>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#generator.Generator.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the snippets into a <code class="docutils literal notranslate"><span class="pre">CHANGELOG</span></code> file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reverse</strong> – Takes a boolean argument whether or not to generate the <code class="docutils literal notranslate"><span class="pre">CHANGELOG</span></code> in reverse.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -222,7 +241,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2021, Vignesh Sivanandha Rao.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
     </div>
   </body>
 </html>

@@ -24,8 +24,14 @@ Generate CHANGELOG from git commit history
 pip install changelog-generator
 ```
 
+###### Regular CHANGELOG
 ```shell
 changelog
+```
+
+###### CHANGELOG in reverse order
+```shell
+changelog reverse
 ```
 
 ### Pre-Commit

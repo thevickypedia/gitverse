@@ -1,13 +1,10 @@
-import logging
 from datetime import datetime
-from importlib import reload
 from os import path, remove, system
-from pathlib import PurePath
 from subprocess import check_output
 from time import perf_counter
 from typing import Union
 
-from click import command, pass_context
+from click import argument, command, pass_context, secho
 
 
 class Generator:
@@ -28,28 +25,22 @@ class Generator:
         - Removes ``CHANGELOG`` if a previous version is available.
             - Older versions are not required, since ``git log`` captures all the commits anyway.
         """
-        reload(logging)
-        logging.basicConfig(
-            format='%(asctime)s - %(levelname)s - [%(module)s:%(lineno)d] - %(funcName)s - %(message)s',
-            datefmt='%b-%d-%Y %I:%M:%S %p'
-        )
-        self.logger = logging.getLogger(PurePath(__file__).stem)
-        self.logger.setLevel(logging.INFO)
         branches = check_output("git branch", shell=True).decode('utf-8').replace('* ', '').strip().split('\n')
         self.trunk = 'main' if 'main' in branches else 'master'
-        self.logger.info(f'Identified trunk branch to be {self.trunk}')
+        secho(message=f'Identified trunk branch to be {self.trunk}', fg='bright_green')
         self.source = 'source_change_log.txt'
         self.change = 'CHANGELOG'
-        self.logger.info('Writing git log into a temp file.')
+        secho(message='Writing git log into a temp file.', fg='bright_green')
         system(f'git log --reverse > {self.source}')
         if path.isfile(self.change):
+            secho(message='WARNING: Found existing CHANGELOG. Recreating now.', fg='bright_yellow')
             remove(self.change)
 
     def __del__(self):
         """Removes the source file as it is temporary and prints the run time."""
-        self.logger.info('Removing temp file.')
+        secho(message='Removing temp file.', fg='bright_green')
         remove(self.source)
-        self.logger.info(f'CHANGELOG was created in: {round(float(perf_counter()), 2)}s')
+        secho(message=f'CHANGELOG was created in: {round(float(perf_counter()), 2)}s', fg='bright_green')
 
     def get_commits(self) -> int:
         """Scans for the number of commits in the ``trunk`` branch.
@@ -59,7 +50,7 @@ class Generator:
             Number of commits.
         """
         commits = int(check_output(f"git rev-list --count {self.trunk}", shell=True).decode('utf-8').split('\n')[0])
-        self.logger.info(f'Number of commits: {commits}')
+        secho(message=f'Number of commits: {commits}', fg='bright_green')
         return commits
 
     def versions(self) -> Union[list, None]:
@@ -102,7 +93,7 @@ class Generator:
             log = file.read().splitlines()
         return log
 
-    def run(self) -> None:
+    def generator(self) -> list:
         """Triggers the conversion process.
 
         Notes:
@@ -113,37 +104,69 @@ class Generator:
 
         See Also:
             - Destructor ``__del__`` method executes upon exit which deletes the ``source_change_log.txt`` file.
+
+        Returns:
+            list:
+            List of snippets that has to be written to ``CHANGELOG`` file.
         """
         versions = self.versions()
         log = self.get_source()
-        self.logger.info('Generating CHANGELOG')
+        secho(message='Generating CHANGELOG', fg='bright_green')
         iterator = 0
+        output = []
+        for index, element in enumerate(log):
+            element = element.strip()
+            if element.startswith('commit') or element.startswith('Author'):
+                continue
+            if element.startswith('Date'):
+                ind = log.index(element)
+                element = ' '.join(element.lstrip('Date:').strip().split()[0:-1])
+                datetime_obj = datetime.strptime(element, "%a %b %d %H:%M:%S %Y")
+                element = f'{versions[iterator]} ({datetime_obj.strftime("%m/%d/%Y")})'
+                iterator += 1
+                log[ind + 1] = '-' * len(element)
+                # log.pop(ind + 1)  # Use this to leave a blank line instead of '----'
+            elif element:
+                if element[0].isdigit():
+                    element = element.replace(element[0:2], '-')
+                if not element[0] == '-':
+                    element = f'- {element}'
+            if not element:
+                output.append('^^')
+            else:
+                output.append(element + '\n')
+        return [snippet for snippet in ''.join(output).split('^^')]
+
+    def run(self, reverse: bool = False):
+        """Writes the snippets into a ``CHANGELOG`` file.
+
+        Args:
+            reverse: Takes a boolean argument whether or not to generate the ``CHANGELOG`` in reverse.
+        """
+        snippets = self.generator()
+        snippets.reverse() if reverse else None
         with open(self.change, 'a') as file:
             file.write('Change Log\n==========\n\n')
-            for index, element in enumerate(log):
-                element = element.strip()
-                if not element.startswith('commit') and not element.startswith('Author'):
-                    if element.startswith('Date'):
-                        ind = log.index(element)
-                        element = ' '.join(element.lstrip('Date:').strip().split()[0:-1])
-                        datetime_obj = datetime.strptime(element, "%a %b %d %H:%M:%S %Y")
-                        element = f'{versions[iterator]} ({datetime_obj.strftime("%m/%d/%Y")})'
-                        iterator += 1
-                        log[ind + 1] = '-' * len(element)
-                        # log.pop(ind + 1)  # Use this to leave a blank line instead of '----'
-                    elif element:
-                        if element[0].isdigit():
-                            element = element.replace(element[0:2], '-')
-                        if not element[0] == '-':
-                            element = f'- {element}'
-                    file.write(element + '\n')
+            for index, each_snippet in enumerate(snippets):
+                file.write(f'{each_snippet}\n' if index + 1 < len(snippets) else each_snippet)
 
 
 @command()
 @pass_context
-def main(*args):
-    """Generate change log file."""
-    Generator().run()
+@argument('reverse', required=False)
+def main(*args, reverse: str = None):
+    """Generate change log file.
+
+    Run 'changelog reverse' to generate changelog in reverse order.
+    """
+    if reverse:
+        if reverse.lower() == 'reverse':
+            secho(message='Generating CHANGELOG from commit history in reverse order.', fg='bright_yellow')
+            Generator().run(reverse=True)
+        else:
+            secho(message='The only allowed options are:\n\t1. changelog\n\t2. changelog reverse', fg='bright_red')
+    else:
+        Generator().run()
 
 
 if __name__ == '__main__':

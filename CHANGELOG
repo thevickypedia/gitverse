@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+0.2.6 (07/31/2022)
+------------------
+- Optimize versions number generation with list comprehension
+- Support version numbers of any extent
+- Update type hint
+
 0.2.5 (10/23/2021)
 ------------------
 - Add an option to generate `CHANGELOG` in reverse order

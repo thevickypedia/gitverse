@@ -34,6 +34,11 @@ changelog
 changelog reverse
 ```
 
+###### Use a branch other than master or main
+```shell
+changelog -b <branch name>
+```
+
 ### Pre-Commit
 Install `pre-commit` to run `flake8` and `isort` for linting and `sphinx` for documentation generator.
 

@@ -4,7 +4,7 @@ from subprocess import check_output
 from time import perf_counter
 from typing import List, NoReturn
 
-from click import argument, command, pass_context, secho
+from click import argument, command, pass_context, secho, option
 
 
 class Generator:
@@ -17,16 +17,20 @@ class Generator:
             - ``git`` command should be working in CLI.
     """
 
-    def __init__(self):
+    def __init__(self, branch: str):
         """Instantiates the Generator object.
 
-        - Checks if trunk branch has ``master`` or ``main`` and gets the commit information from the trunk branch.
+        - If the branch is not passed then we check if trunk branch has ``master`` or ``main``
+        - Then gets the commit information from the trunk branch.
         - Stores the output of ``git log`` to a ``source_change_log.txt`` file.
         - Removes ``CHANGELOG`` if a previous version is available.
             - Older versions are not required, since ``git log`` captures all the commits anyway.
         """
-        branches = check_output("git branch", shell=True).decode('utf-8').replace('* ', '').strip().split('\n')
-        self.trunk = 'main' if 'main' in branches else 'master'
+        if branch:
+            self.trunk = branch
+        else:
+            branches = check_output("git branch", shell=True).decode('utf-8').replace('* ', '').strip().split('\n')
+            self.trunk = 'main' if 'main' in branches else 'master'
         secho(message=f'Identified trunk branch to be {self.trunk}', fg='bright_green')
         self.source = 'source_change_log.txt'
         self.change = 'CHANGELOG'
@@ -125,7 +129,8 @@ class Generator:
 @command()
 @pass_context
 @argument('reverse', required=False)
-def main(*args, reverse: str = None) -> None:
+@option("-b", "--branch", help="The branch to read the changelog from")
+def main(*args, reverse: str = None, branch: str = None) -> None:
     """Generate change log file.
 
     Run 'changelog reverse' to generate changelog in reverse order.
@@ -135,9 +140,9 @@ def main(*args, reverse: str = None) -> None:
             secho(message='Generating CHANGELOG from commit history in reverse order.', fg='bright_yellow')
             Generator().run(reverse=True)
         else:
-            secho(message='The only allowed options are:\n\t1. changelog\n\t2. changelog reverse', fg='bright_red')
+            secho(message='The only allowed options are:\n\t1. changelog\n\t2. changelog reverse\n\t3. branch to use for changelog', fg='bright_red')
     else:
-        Generator().run()
+        Generator(branch).run()
 
 
 if __name__ == '__main__':

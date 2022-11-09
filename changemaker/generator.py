@@ -129,7 +129,7 @@ class Generator:
 @command()
 @pass_context
 @argument('reverse', required=False)
-@option("-b", "--branch", help="The branch to read the changelog from")
+@option("-b", "--branch", help="The branch to read the commit history from")
 def main(*args, reverse: str = None, branch: str = None) -> None:
     """Generate change log file.
 

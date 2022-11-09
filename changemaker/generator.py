@@ -140,7 +140,8 @@ def main(*args, reverse: str = None, branch: str = None) -> None:
             secho(message='Generating CHANGELOG from commit history in reverse order.', fg='bright_yellow')
             Generator(branch).run(reverse=True)
         else:
-            secho(message='The only allowed options are:\n\t1. changelog\n\t2. changelog reverse\n\t3. branch to use for changelog', fg='bright_red')
+            secho(message='The only allowed options are:\n\t1. changelog\n\t2. changelog reverse\n\t
+            3. branch to use for changelog', fg='bright_red')
     else:
         Generator(branch).run()
 

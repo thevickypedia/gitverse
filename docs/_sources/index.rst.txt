@@ -19,6 +19,13 @@ CHANGELOG Generator
    :members:
    :undoc-members:
 
+Debugger
+========
+
+.. automodule:: debugger
+   :members:
+   :undoc-members:
+
 Indices and tables
 ==================
 

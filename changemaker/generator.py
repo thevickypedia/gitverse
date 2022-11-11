@@ -1,143 +1,182 @@
+import os
+import subprocess
+import time
 from datetime import datetime
-from os import path, remove, system
-from subprocess import check_output
-from time import perf_counter
-from typing import List, NoReturn
+from typing import List, NoReturn, Union
 
-from click import argument, command, pass_context, secho
+import click
+
+from changemaker import debugger
+
+options = {'debug': False, 'reverse': False}
 
 
-class Generator:
-    """Initiates Generator object to generate ``CHANGELOG`` from output of ``git log`` command.
+def get_branches() -> List:
+    """Runs ``git branch`` command to get the branches available for the repo.
 
-    >>> Generator
-
-    See Also:
-        Pre-requisite:
-            - ``git`` command should be working in CLI.
+    Returns:
+        list:
+        Returns a list of branches available.
     """
+    try:
+        branches = subprocess.check_output("git branch",
+                                           shell=True).decode(encoding='UTF-8').replace('* ', '').strip().splitlines()
+        return branches
+    except subprocess.SubprocessError as error:
+        debugger.error(error) if options['debug'] else None
 
-    def __init__(self):
-        """Instantiates the Generator object.
 
-        - Checks if trunk branch has ``master`` or ``main`` and gets the commit information from the trunk branch.
-        - Stores the output of ``git log`` to a ``source_change_log.txt`` file.
-        - Removes ``CHANGELOG`` if a previous version is available.
-            - Older versions are not required, since ``git log`` captures all the commits anyway.
-        """
-        branches = check_output("git branch", shell=True).decode('utf-8').replace('* ', '').strip().split('\n')
-        self.trunk = 'main' if 'main' in branches else 'master'
-        secho(message=f'Identified trunk branch to be {self.trunk}', fg='bright_green')
-        self.source = 'source_change_log.txt'
-        self.change = 'CHANGELOG'
-        secho(message='Writing git log into a temp file.', fg='bright_green')
-        system(f'git log --reverse > {self.source}')
-        if path.isfile(self.change):
-            secho(message='WARNING: Found existing CHANGELOG. Recreating now.', fg='bright_yellow')
-            remove(self.change)
+def get_gitlog(branch: str) -> List:
+    """Runs the command ``git log`` to get the all commit messages excluding merges and in reverse order.
 
-    def __del__(self):
-        """Removes the source file as it is temporary and prints the run time."""
-        secho(message='Removing temp file.', fg='bright_green')
-        remove(self.source)
-        secho(message=f'CHANGELOG was created in: {round(float(perf_counter()), 2)}s', fg='bright_green')
+    Args:
+        branch: Branch name.
 
-    def get_commits(self) -> int:
-        """Scans for the number of commits in the ``trunk`` branch.
+    Returns:
+        list:
+        Returns the output of gitlog as a list.
+    """
+    try:
+        return subprocess.check_output(f'git log --no-merges --reverse {branch}',
+                                       shell=True).decode(encoding='UTF-8').splitlines()
+    except subprocess.SubprocessError as error:
+        debugger.error(error) if options['debug'] else None
 
-        Returns:
-            int:
-            Number of commits.
-        """
-        commits = int(check_output(f"git rev-list --count {self.trunk}", shell=True).decode('utf-8').split('\n')[0])
-        secho(message=f'Number of commits: {commits}', fg='bright_green')
+
+def get_commits(trunk: str) -> int:
+    """Scans for the number of commits in the ``trunk`` branch.
+
+    Args:
+        trunk: Branch name.
+
+    Returns:
+        int:
+        Number of commits.
+    """
+    try:
+        commits = int(subprocess.check_output(f"git rev-list --count {trunk}",
+                                              shell=True).decode('utf-8').splitlines()[0])
+        debugger.info(f'Number of commits: {commits}') if options['debug'] else None
         return commits
-
-    def get_source(self) -> List[str]:
-        """Reads the source file and splits it by lines to return it as a list.
-
-        Returns:
-            list:
-            Content of the source file: ``git log``.
-        """
-        with open(self.source, 'r') as file:
-            log = file.read().splitlines()
-        return log
-
-    def generator(self) -> List[str]:
-        """Triggers the conversion process.
-
-        Notes:
-            - Calls the ``get_source()`` method.
-            - Ignores lines containing commit sha and Author information.
-            - Converts git datetime into a different format.
-            - Adds ``-`` in front of the lines in description for all changes.
-
-        See Also:
-            - Destructor ``__del__`` method executes upon exit which deletes the ``source_change_log.txt`` file.
-
-        Returns:
-            list:
-            List of snippets that has to be written to ``CHANGELOG`` file.
-        """
-        versions = ['.'.join(v for v in "{:03d}".format(n)) for n in range(1, self.get_commits() + 1)]
-        log = self.get_source()
-        secho(message='Generating CHANGELOG', fg='bright_green')
-        iterator = 0
-        output = []
-        for index, element in enumerate(log):
-            element = element.strip()
-            if element.startswith('commit') or element.startswith('Author'):
-                continue
-            if element.startswith('Date'):
-                ind = log.index(element)
-                element = ' '.join(element.lstrip('Date:').strip().split()[0:-1])
-                datetime_obj = datetime.strptime(element, "%a %b %d %H:%M:%S %Y")
-                element = f'{versions[iterator]} ({datetime_obj.strftime("%m/%d/%Y")})'
-                iterator += 1
-                log[ind + 1] = '-' * len(element)
-                # log.pop(ind + 1)  # Use this to leave a blank line instead of '----'
-            elif element:
-                if element[0].isdigit():
-                    element = element.replace(element[0:2], '-')
-                if not element[0] == '-':
-                    element = f'- {element}'
-            if not element:
-                output.append('^^')
-            else:
-                output.append(element + '\n')
-        return [snippet for snippet in ''.join(output).split('^^')]
-
-    def run(self, reverse: bool = False) -> NoReturn:
-        """Writes the snippets into a ``CHANGELOG`` file.
-
-        Args:
-            reverse: Takes a boolean argument whether to generate the ``CHANGELOG`` in reverse.
-        """
-        snippets = self.generator()
-        snippets.reverse() if reverse else None
-        with open(self.change, 'a') as file:
-            file.write('Change Log\n==========\n\n')
-            for index, each_snippet in enumerate(snippets):
-                file.write(f'{each_snippet}\n' if index + 1 < len(snippets) else each_snippet)
+    except subprocess.SubprocessError as error:
+        debugger.error(error) if options['debug'] else None
 
 
-@command()
-@pass_context
-@argument('reverse', required=False)
-def main(*args, reverse: str = None) -> None:
-    """Generate change log file.
+def generator(versions: List[str], gitlog: List[str]) -> Union[List[str], None]:
+    """Triggers the conversion process.
+
+    Returns:
+        list:
+        List of snippets that has to be written to ``CHANGELOG`` file.
+    """
+    iterator = 0
+    output = []
+    for index, element in enumerate(gitlog):
+        element = element.strip()
+        if element.startswith('commit') or element.startswith('Author'):
+            continue
+        if element.startswith('Date'):
+            ind = gitlog.index(element)
+            element = ' '.join(element.lstrip('Date:').strip().split()[0:-1])
+            datetime_obj = datetime.strptime(element, "%a %b %d %H:%M:%S %Y")
+            element = f'{versions[iterator]} ({datetime_obj.strftime("%m/%d/%Y")})'
+            iterator += 1
+            gitlog[ind + 1] = '-' * len(element)
+            # log.pop(ind + 1)  # Use this to leave a blank line instead of '----'
+        elif element:
+            if element[0].isdigit():
+                element = element.replace(element[0:2], '-')
+            if not element[0] == '-':
+                element = f'- {element}'
+        if not element:
+            output.append('^^')
+        else:
+            output.append(element + '\n')
+    return [snippet for snippet in ''.join(output).split('^^')]
+
+
+def run(branch: str, filename: str) -> NoReturn:
+    """Handler for generator functions that writes the changelog into a file.
+
+    Args:
+        branch: Name of the branch.
+        filename: Name of the file that where the changelog has to be stored.
+    """
+    branches = get_branches()
+    if branch and branch not in branches:
+        debugger.error(f"{branch!r} is not available.") if options['debug'] else None
+        debugger.info(f"Available branches: {', '.join(branches)}") if options['debug'] else None
+        return
+    elif not branch:
+        branch = 'main' if 'main' in branches else 'master'
+    debugger.info(f'Identified trunk branch to be {branch!r}') if options['debug'] else None
+
+    debugger.info(f'Getting commit history for branch {branch!r}') if options['debug'] else None
+    commits = get_commits(trunk=branch)
+    if not commits:
+        return
+
+    debugger.info(f'Getting git log for the branch {branch!r}') if options['debug'] else None
+    gitlog = get_gitlog(branch=branch)
+    if not gitlog:
+        return
+
+    debugger.info(f'Generating {filename!r}') if options['debug'] else None
+    snippets = generator(gitlog=gitlog,
+                         versions=['.'.join(v for v in "{:03d}".format(n)) for n in range(1, commits + 1)])
+    if not snippets:
+        return
+
+    if options['reverse']:
+        debugger.warning('Generating CHANGELOG from commit history in reverse order.') if options['debug'] else None
+        snippets.reverse()
+
+    if os.path.isfile(filename):
+        debugger.warning(f'WARNING: Found existing {filename!r}. Recreating now.') if options['debug'] else None
+        os.remove(filename)
+    with open(filename, 'a') as file:
+        file.write('Change Log\n==========\n\n')
+        for index, each_snippet in enumerate(snippets):
+            file.write(f'{each_snippet}\n' if index + 1 < len(snippets) else each_snippet)
+    debugger.info(f'{filename!r} was created in: {round(float(time.perf_counter()), 2)}s') if options['debug'] else None
+
+
+@click.command()
+@click.pass_context
+@click.argument('reverse', required=False)
+@click.argument('debug', required=False)
+@click.option("-b", "--branch", help="The branch to read the changelog from")
+@click.option("-f", "--filename", help="Filename where the changelog should be stored")
+def main(*args, reverse: str = None, debug: str = None, branch: str = None, filename: str = None) -> None:
+    """Generate 'CHANGELOG' file using github commit history.
 
     Run 'changelog reverse' to generate changelog in reverse order.
+
+    Run 'changelog debug' to enable debug mode.
     """
-    if reverse:
-        if reverse.lower() == 'reverse':
-            secho(message='Generating CHANGELOG from commit history in reverse order.', fg='bright_yellow')
-            Generator().run(reverse=True)
-        else:
-            secho(message='The only allowed options are:\n\t1. changelog\n\t2. changelog reverse', fg='bright_red')
-    else:
-        Generator().run()
+    reverse = reverse or ''
+    debug = debug or ''
+
+    # The following makes arguments interchangeable for convenience
+    if reverse.lower() == 'reverse':
+        options['reverse'] = True
+    elif reverse.lower() == 'debug':
+        options['debug'] = True
+    elif reverse:
+        debugger.error('The only allowed commands are:\n\t1. changelog\n\t2. changelog reverse\n\t3. changelog debug')
+        return
+
+    if debug.lower() == 'debug':
+        options['debug'] = True
+    elif debug.lower() == 'reverse':
+        options['reverse'] = True
+    elif debug:
+        debugger.error('The only allowed commands are:\n\t1. changelog\n\t2. changelog reverse\n\t3. changelog debug')
+        return
+
+    if filename is None:
+        filename = 'CHANGELOG'
+    run(branch=branch, filename=filename)
 
 
 if __name__ == '__main__':

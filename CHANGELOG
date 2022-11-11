@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+0.2.7 (11/10/2022)
+------------------
+- Add optional branch name to pull branch specific commits
+- Add exception handlers and print messages appropriately
+- Enable debug mode by command
+- Restructure code and cleanup
+- Enable pypi workflow on commit
+
 0.2.6 (07/31/2022)
 ------------------
 - Optimize versions number generation with list comprehension

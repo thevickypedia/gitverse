@@ -59,51 +59,10 @@
 </section>
 <section id="module-generator">
 <span id="changelog-generator"></span><h1>CHANGELOG Generator<a class="headerlink" href="#module-generator" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="generator.Generator">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">Generator</span></span><a class="headerlink" href="#generator.Generator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initiates Generator object to generate <code class="docutils literal notranslate"><span class="pre">CHANGELOG</span></code> from output of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> command.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Generator</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt>Pre-requisite:</dt><dd><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span></code> command should be working in CLI.</p></li>
-</ul>
-</dd>
-</dl>
-</div>
-<p>Instantiates the Generator object.</p>
-<ul class="simple">
-<li><p>Checks if trunk branch has <code class="docutils literal notranslate"><span class="pre">master</span></code> or <code class="docutils literal notranslate"><span class="pre">main</span></code> and gets the commit information from the trunk branch.</p></li>
-<li><p>Stores the output of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> to a <code class="docutils literal notranslate"><span class="pre">source_change_log.txt</span></code> file.</p></li>
-<li><dl class="simple">
-<dt>Removes <code class="docutils literal notranslate"><span class="pre">CHANGELOG</span></code> if a previous version is available.</dt><dd><ul>
-<li><p>Older versions are not required, since <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> captures all the commits anyway.</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<dl class="py method">
-<dt class="sig sig-object py" id="generator.Generator.generator">
-<span class="sig-name descname"><span class="pre">generator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#generator.Generator.generator" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="generator.generator">
+<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">versions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gitlog</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#generator.generator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Triggers the conversion process.</p>
-<p class="rubric">Notes</p>
-<ul class="simple">
-<li><p>Calls the <code class="docutils literal notranslate"><span class="pre">get_source()</span></code> method.</p></li>
-<li><p>Ignores lines containing commit sha and Author information.</p></li>
-<li><p>Converts git datetime into a different format.</p></li>
-<li><p>Adds <code class="docutils literal notranslate"><span class="pre">-</span></code> in front of the lines in description for all changes.</p></li>
-</ul>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<ul class="simple">
-<li><p>Destructor <code class="docutils literal notranslate"><span class="pre">__del__</span></code> method executes upon exit which deletes the <code class="docutils literal notranslate"><span class="pre">source_change_log.txt</span></code> file.</p></li>
-</ul>
-</div>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>List of snippets that has to be written to <code class="docutils literal notranslate"><span class="pre">CHANGELOG</span></code> file.</p>
@@ -114,27 +73,13 @@
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="generator.Generator.get_commits">
-<span class="sig-name descname"><span class="pre">get_commits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#generator.Generator.get_commits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Scans for the number of commits in the <code class="docutils literal notranslate"><span class="pre">trunk</span></code> branch.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="generator.get_branches">
+<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">get_branches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#generator.get_branches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code> command to get the branches available for the repo.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Number of commits.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="generator.Generator.get_source">
-<span class="sig-name descname"><span class="pre">get_source</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#generator.Generator.get_source" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the source file and splits it by lines to return it as a list.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Content of the source file: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>.</p>
+<dd class="field-odd"><p>Returns a list of branches available.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>list</p>
@@ -142,17 +87,79 @@
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="generator.Generator.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#generator.Generator.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes the snippets into a <code class="docutils literal notranslate"><span class="pre">CHANGELOG</span></code> file.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="generator.get_commits">
+<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">get_commits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trunk</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#generator.get_commits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scans for the number of commits in the <code class="docutils literal notranslate"><span class="pre">trunk</span></code> branch.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>reverse</strong> – Takes a boolean argument whether to generate the <code class="docutils literal notranslate"><span class="pre">CHANGELOG</span></code> in reverse.</p>
+<dd class="field-odd"><p><strong>trunk</strong> – Branch name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Number of commits.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
 </dd>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="generator.get_gitlog">
+<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">get_gitlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#generator.get_gitlog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> to get the all commit messages excluding merges and in reverse order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>branch</strong> – Branch name.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the output of gitlog as a list.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="generator.run">
+<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#generator.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler for generator functions that writes the changelog into a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>branch</strong> – Name of the branch.</p></li>
+<li><p><strong>filename</strong> – Name of the file that where the changelog has to be stored.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-debugger">
+<span id="debugger"></span><h1>Debugger<a class="headerlink" href="#module-debugger" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="debugger.debug">
+<span class="sig-prename descclassname"><span class="pre">debugger.</span></span><span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#debugger.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the incoming message in light green.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="debugger.error">
+<span class="sig-prename descclassname"><span class="pre">debugger.</span></span><span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#debugger.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the incoming message in bright red.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="debugger.info">
+<span class="sig-prename descclassname"><span class="pre">debugger.</span></span><span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#debugger.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the incoming message in bright green.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="debugger.warning">
+<span class="sig-prename descclassname"><span class="pre">debugger.</span></span><span class="sig-name descname"><span class="pre">warning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#debugger.warning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the incoming message in bright yellow.</p>
 </dd></dl>
 
 </section>
@@ -176,6 +183,7 @@
   <ul>
 <li><a class="reference internal" href="#">Welcome to Changelog Generator’s documentation!</a></li>
 <li><a class="reference internal" href="#module-generator">CHANGELOG Generator</a></li>
+<li><a class="reference internal" href="#module-debugger">Debugger</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 

@@ -1,13 +1,13 @@
 [![Pypi-version](https://img.shields.io/pypi/v/changelog-generator)](https://pypi.org/project/changelog-generator)
-[![Pypi-py-version](https://img.shields.io/pypi/pyversions/changelog-generator)](https://pypi.org/project/changelog-generator)
+![Python](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)
 
-![docs](https://github.com/thevickypedia/changelog-generator/actions/workflows/docs.yml/badge.svg)
-![pypi](https://github.com/thevickypedia/changelog-generator/actions/workflows/python-publish.yml/badge.svg)
+[![pages-build-deployment](https://github.com/thevickypedia/changelog-generator/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/thevickypedia/changelog-generator/actions/workflows/pages/pages-build-deployment)
+[![pypi](https://github.com/thevickypedia/changelog-generator/actions/workflows/python-publish.yml/badge.svg)](https://github.com/thevickypedia/changelog-generator/actions/workflows/python-publish.yml)
 
 [![Pypi-format](https://img.shields.io/pypi/format/changelog-generator)](https://pypi.org/project/changelog-generator/#files)
 [![Pypi-status](https://img.shields.io/pypi/status/changelog-generator)](https://pypi.org/project/changelog-generator)
 
-![Maintained](https://img.shields.io/maintenance/yes/2021)
+![Maintained](https://img.shields.io/maintenance/yes/2022)
 [![GitHub Repo created](https://img.shields.io/date/1630367571)](https://api.github.com/repos/thevickypedia/changelog-generator)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/thevickypedia/changelog-generator)](https://api.github.com/repos/thevickypedia/changelog-generator)
 [![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/changelog-generator)](https://api.github.com/repos/thevickypedia/changelog-generator)
@@ -29,9 +29,19 @@ pip install changelog-generator
 changelog
 ```
 
+###### Regular CHANGELOG in debug mode
+```shell
+changelog debug
+```
+
 ###### CHANGELOG in reverse order
 ```shell
 changelog reverse
+```
+
+###### Use a branch other than `master` or `main`
+```shell
+changelog -b <branch name>
 ```
 
 ### Pre-Commit

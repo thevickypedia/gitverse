@@ -42,12 +42,12 @@
           <div class="body" role="main">
             
   <p><a class="reference external" href="https://pypi.org/project/changelog-generator"><img alt="Pypi-version" src="https://img.shields.io/pypi/v/changelog-generator" /></a>
-<a class="reference external" href="https://pypi.org/project/changelog-generator"><img alt="Pypi-py-version" src="https://img.shields.io/pypi/pyversions/changelog-generator" /></a></p>
-<p><img alt="docs" src="https://github.com/thevickypedia/changelog-generator/actions/workflows/docs.yml/badge.svg" />
-<img alt="pypi" src="https://github.com/thevickypedia/changelog-generator/actions/workflows/python-publish.yml/badge.svg" /></p>
+<img alt="Python" src="https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue" /></p>
+<p><a class="reference external" href="https://github.com/thevickypedia/changelog-generator/actions/workflows/pages/pages-build-deployment"><img alt="pages-build-deployment" src="https://github.com/thevickypedia/changelog-generator/actions/workflows/pages/pages-build-deployment/badge.svg" /></a>
+<a class="reference external" href="https://github.com/thevickypedia/changelog-generator/actions/workflows/python-publish.yml"><img alt="pypi" src="https://github.com/thevickypedia/changelog-generator/actions/workflows/python-publish.yml/badge.svg" /></a></p>
 <p><a class="reference external" href="https://pypi.org/project/changelog-generator/#files"><img alt="Pypi-format" src="https://img.shields.io/pypi/format/changelog-generator" /></a>
 <a class="reference external" href="https://pypi.org/project/changelog-generator"><img alt="Pypi-status" src="https://img.shields.io/pypi/status/changelog-generator" /></a></p>
-<p><img alt="Maintained" src="https://img.shields.io/maintenance/yes/2021" />
+<p><img alt="Maintained" src="https://img.shields.io/maintenance/yes/2022" />
 <a class="reference external" href="https://api.github.com/repos/thevickypedia/changelog-generator"><img alt="GitHub Repo created" src="https://img.shields.io/date/1630367571" /></a>
 <a class="reference external" href="https://api.github.com/repos/thevickypedia/changelog-generator"><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/thevickypedia/changelog-generator" /></a>
 <a class="reference external" href="https://api.github.com/repos/thevickypedia/changelog-generator"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/thevickypedia/changelog-generator" /></a></p>
@@ -72,9 +72,21 @@
 </pre></div>
 </div>
 </section>
+<section id="regular-changelog-in-debug-mode">
+<h3>Regular CHANGELOG in debug mode<a class="headerlink" href="#regular-changelog-in-debug-mode" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>changelog debug
+</pre></div>
+</div>
+</section>
 <section id="changelog-in-reverse-order">
 <h3>CHANGELOG in reverse order<a class="headerlink" href="#changelog-in-reverse-order" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>changelog reverse
+</pre></div>
+</div>
+</section>
+<section id="use-a-branch-other-than-master-or-main">
+<h3>Use a branch other than <code class="docutils literal notranslate"><span class="pre">master</span></code> or <code class="docutils literal notranslate"><span class="pre">main</span></code><a class="headerlink" href="#use-a-branch-other-than-master-or-main" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>changelog -b &lt;branch name&gt;
 </pre></div>
 </div>
 </section>
@@ -110,7 +122,9 @@
 <li><a class="reference internal" href="#usage">Usage</a><ul>
 <li><a class="reference internal" href="#navigate-to-the-repository-and-run">Navigate to the repository and run:</a></li>
 <li><a class="reference internal" href="#regular-changelog">Regular CHANGELOG</a></li>
+<li><a class="reference internal" href="#regular-changelog-in-debug-mode">Regular CHANGELOG in debug mode</a></li>
 <li><a class="reference internal" href="#changelog-in-reverse-order">CHANGELOG in reverse order</a></li>
+<li><a class="reference internal" href="#use-a-branch-other-than-master-or-main">Use a branch other than <code class="docutils literal notranslate"><span class="pre">master</span></code> or <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#pre-commit">Pre-Commit</a></li>

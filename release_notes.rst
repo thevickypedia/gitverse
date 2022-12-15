@@ -1,6 +1,12 @@
 Release Notes
 ==========
 
+0.2.9 (12/14/2022)
+------------------
+- Update runbook and README.md
+- Add a check to block commit if release_notes.txt isn't updated
+- Suppress flake8 ``SFS101 String literal formatting using percent operator``
+
 0.2.8 (12/14/2022)
 ------------------
 - Add optional title flag to for the file generated

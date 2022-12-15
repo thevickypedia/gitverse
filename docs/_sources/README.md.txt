@@ -39,10 +39,10 @@ changelog debug
 changelog reverse
 ```
 
-###### Use a branch other than `master` or `main`
-```shell
-changelog -b <branch name>
-```
+###### Flags
+- `-b` Gather commit notes specific to a branch. Defaults to `master`/`main`)
+- `-f` Write the commit notes to a custom filename. Defaults to `CHANGELOG`
+- `-t` Title or index line for the file generated. Defaults to `Change Log`
 
 ### Pre-Commit
 Install `pre-commit` to run `flake8` and `isort` for linting and `sphinx` for documentation generator.

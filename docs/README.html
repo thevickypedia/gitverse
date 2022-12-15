@@ -84,11 +84,13 @@
 </pre></div>
 </div>
 </section>
-<section id="use-a-branch-other-than-master-or-main">
-<h3>Use a branch other than <code class="docutils literal notranslate"><span class="pre">master</span></code> or <code class="docutils literal notranslate"><span class="pre">main</span></code><a class="headerlink" href="#use-a-branch-other-than-master-or-main" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>changelog -b &lt;branch name&gt;
-</pre></div>
-</div>
+<section id="flags">
+<h3>Flags<a class="headerlink" href="#flags" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-b</span></code> Gather commit notes specific to a branch. Defaults to <code class="docutils literal notranslate"><span class="pre">master</span></code>/<code class="docutils literal notranslate"><span class="pre">main</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code> Write the commit notes to a custom filename. Defaults to <code class="docutils literal notranslate"><span class="pre">CHANGELOG</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-t</span></code> Title or index line for the file generated. Defaults to <code class="docutils literal notranslate"><span class="pre">Change</span> <span class="pre">Log</span></code></p></li>
+</ul>
 </section>
 </section>
 <section id="pre-commit">
@@ -124,7 +126,7 @@
 <li><a class="reference internal" href="#regular-changelog">Regular CHANGELOG</a></li>
 <li><a class="reference internal" href="#regular-changelog-in-debug-mode">Regular CHANGELOG in debug mode</a></li>
 <li><a class="reference internal" href="#changelog-in-reverse-order">CHANGELOG in reverse order</a></li>
-<li><a class="reference internal" href="#use-a-branch-other-than-master-or-main">Use a branch other than <code class="docutils literal notranslate"><span class="pre">master</span></code> or <code class="docutils literal notranslate"><span class="pre">main</span></code></a></li>
+<li><a class="reference internal" href="#flags">Flags</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#pre-commit">Pre-Commit</a></li>

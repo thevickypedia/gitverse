@@ -67,7 +67,7 @@ def generator(versions: List[str], gitlog: List[str]) -> Union[List[str], None]:
 
     Returns:
         list:
-        List of snippets that has to be written to ``CHANGELOG`` file.
+        List of snippets that has to be written to the output file.
     """
     iterator = 0
     output = []
@@ -95,12 +95,13 @@ def generator(versions: List[str], gitlog: List[str]) -> Union[List[str], None]:
     return [snippet for snippet in ''.join(output).split('^^')]
 
 
-def run(branch: str, filename: str) -> NoReturn:
-    """Handler for generator functions that writes the changelog into a file.
+def run(branch: str, filename: str, title: str) -> NoReturn:
+    """Handler for generator functions that writes the commit history into a file.
 
     Args:
         branch: Name of the branch.
-        filename: Name of the file that where the changelog has to be stored.
+        filename: Name of the file that where the commit history has to be stored.
+        title: Title under which the commit history has to be stored.
     """
     branches = get_branches()
     if branch and branch not in branches:
@@ -119,6 +120,7 @@ def run(branch: str, filename: str) -> NoReturn:
     debugger.info(f'Getting git log for the branch {branch!r}') if options['debug'] else None
     gitlog = get_gitlog(branch=branch)
     if not gitlog:
+        debugger.error('No commit message found.') if options['debug'] else None
         return
 
     debugger.info(f'Generating {filename!r}') if options['debug'] else None
@@ -128,14 +130,14 @@ def run(branch: str, filename: str) -> NoReturn:
         return
 
     if options['reverse']:
-        debugger.warning('Generating CHANGELOG from commit history in reverse order.') if options['debug'] else None
+        debugger.warning(f'Generating {filename!r} from commit history in reverse order.') if options['debug'] else None
         snippets.reverse()
 
     if os.path.isfile(filename):
         debugger.warning(f'WARNING: Found existing {filename!r}. Recreating now.') if options['debug'] else None
         os.remove(filename)
     with open(filename, 'a') as file:
-        file.write('Change Log\n==========\n\n')
+        file.write('%s\n==========\n\n' % title)
         for index, each_snippet in enumerate(snippets):
             file.write(f'{each_snippet}\n' if index + 1 < len(snippets) else each_snippet)
     debugger.info(f'{filename!r} was created in: {round(float(time.perf_counter()), 2)}s') if options['debug'] else None
@@ -145,10 +147,12 @@ def run(branch: str, filename: str) -> NoReturn:
 @click.pass_context
 @click.argument('reverse', required=False)
 @click.argument('debug', required=False)
-@click.option("-b", "--branch", help="The branch to read the changelog from")
-@click.option("-f", "--filename", help="Filename where the changelog should be stored")
-def main(*args, reverse: str = None, debug: str = None, branch: str = None, filename: str = None) -> None:
-    """Generate 'CHANGELOG' file using github commit history.
+@click.option("-b", "--branch", help="The branch to read the commit notes from")
+@click.option("-f", "--filename", help="Filename where the commit notes should be stored")
+@click.option("-t", "--title", help="Title under which the commit notes should be stored")
+def main(*args, reverse: str = None, debug: str = None,
+         branch: str = None, filename: str = None, title: str = None) -> None:
+    """Generate a reStructuredText/Markdown file using github commit notes.
 
     Run 'changelog reverse' to generate changelog in reverse order.
 
@@ -176,7 +180,9 @@ def main(*args, reverse: str = None, debug: str = None, branch: str = None, file
 
     if filename is None:
         filename = 'CHANGELOG'
-    run(branch=branch, filename=filename)
+    if title is None:
+        title = 'Change Log'
+    run(branch=branch, filename=filename, title=title)
 
 
 if __name__ == '__main__':

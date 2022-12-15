@@ -14,16 +14,18 @@ classifiers = [
 ]
 
 
-def read(name):
+def read(name: str) -> str:
     """https://pythonhosted.org/an_example_pypi_project/setuptools.html#setting-up-setup-py - reference."""
-    return open(path.join(path.dirname(__file__), name)).read()
+    with open(path.join(path.dirname(__file__), name)) as file:
+        content = file.read()
+    return content
 
 
 setup(
     name='changelog-generator',
     version='.'.join(str(c) for c in version_info),
     description='Python module to, generate CHANGELOG from git commit history.',
-    long_description=read('README.md') + '\n\n' + read('CHANGELOG'),
+    long_description=read('README.md'),
     url='https://github.com/thevickypedia/changelog-generator',
     author='Vignesh Sivanandha Rao',
     author_email='svignesh1793@gmail.com',
@@ -40,6 +42,7 @@ setup(
     project_urls={
         'Source': 'https://github.com/thevickypedia/changelog-generator',
         'Docs': 'https://thevickypedia.github.io/changelog-generator',
+        'Release Notes': 'https://github.com/thevickypedia/changelog-generator/blob/main/release_notes.rst',
         'Tracker': 'https://github.com/thevickypedia/changelog-generator/issues'
     }
 )

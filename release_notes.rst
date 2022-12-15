@@ -1,5 +1,11 @@
-Change Log
+Release Notes
 ==========
+
+0.2.8 (12/14/2022)
+------------------
+- Add optional title flag to for the file generated
+- Add more generic notes in docstrings
+- Remove CHANGELOG
 
 0.2.7 (11/10/2022)
 ------------------

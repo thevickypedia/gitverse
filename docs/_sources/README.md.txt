@@ -16,7 +16,7 @@
 Generate CHANGELOG from git commit history
 
 ### Pypi Module
-[https://pypi.org/project/changelog-generator/](https://pypi.org/project/changelog-generator/)
+[https://pypi.org/project/changelog-generator/][pypi]
 
 ### Usage
 ###### Navigate to the repository and run:
@@ -40,9 +40,12 @@ changelog reverse
 ```
 
 ###### Flags
-- `-b` Gather commit notes specific to a branch. Defaults to `master`/`main`)
+- `-b` Gather commit notes specific to a branch. Uses `Default branch` if not passed
 - `-f` Write the commit notes to a custom filename. Defaults to `CHANGELOG`
 - `-t` Title or index line for the file generated. Defaults to `Change Log`
+
+#### Sample
+[release_notes.rst][release_notes]
 
 ### Pre-Commit
 Install `pre-commit` to run `flake8` and `isort` for linting and `sphinx` for documentation generator.
@@ -52,10 +55,15 @@ Install `pre-commit` to run `flake8` and `isort` for linting and `sphinx` for do
 `pre-commit run --all-files`
 
 ### Runbook
-[GitHub Docs](https://thevickypedia.github.io/changelog-generator/)
+[GitHub Docs][runbook]
 
 ## License & copyright
 
 &copy; Vignesh Sivanandha Rao, Changelog Generator
 
-Licensed under the [MIT License](https://github.com/thevickypedia/changelog-generator/blob/master/LICENSE)
+Licensed under the [MIT License][license]
+
+[release_notes]: https://github.com/thevickypedia/changelog-generator/blob/main/release_notes.rst
+[runbook]: https://thevickypedia.github.io/changelog-generator/
+[license]: https://github.com/thevickypedia/changelog-generator/blob/master/LICENSE
+[pypi]: https://pypi.org/project/changelog-generator/

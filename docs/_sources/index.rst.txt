@@ -26,6 +26,13 @@ Debugger
    :members:
    :undoc-members:
 
+RST Parser
+==========
+
+.. automodule:: utils.rst
+   :members:
+   :undoc-members:
+
 Indices and tables
 ==================
 

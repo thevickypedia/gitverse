@@ -147,7 +147,7 @@ def run(branch: str, filename: str, title: str) -> NoReturn:
         debugger.warning(f'WARNING: Found existing {filename!r}. Recreating now.') if options['debug'] else None
         os.remove(filename)
     with open(filename, 'a') as file:
-        file.write('%s\n==========\n\n' % title)
+        file.write('%s\n%s\n\n' % (title, '=' * len(title)))
         for index, each_snippet in enumerate(snippets):
             file.write(f'{each_snippet}\n' if index + 1 < len(snippets) else each_snippet)
     debugger.info(f'{filename!r} was created in: {round(float(time.perf_counter()), 2)}s') if options['debug'] else None

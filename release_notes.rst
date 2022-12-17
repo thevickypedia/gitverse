@@ -1,5 +1,16 @@
 Release Notes
-==========
+=============
+
+0.3.1 (12/17/2022)
+------------------
+- Make title underline consistent across any title
+- Add an optional utils package to convert rst to html/dict
+
+0.3.0 (12/17/2022)
+------------------
+- Add detailed log when git commands fail in debug mode
+- Set github actions to build on release tag
+- Update README.md and add more classifiers on pypi
 
 0.2.9 (12/14/2022)
 ------------------

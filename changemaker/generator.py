@@ -22,8 +22,13 @@ def get_branches() -> List:
         branches = subprocess.check_output("git branch",
                                            shell=True).decode(encoding='UTF-8').replace('* ', '').strip().splitlines()
         return branches
-    except subprocess.SubprocessError as error:
-        debugger.error(error) if options['debug'] else None
+    except (subprocess.CalledProcessError, subprocess.SubprocessError, Exception) as error:
+        if options['debug']:
+            if isinstance(error, subprocess.CalledProcessError):
+                result = error.output.decode(encoding='UTF-8').strip()
+                debugger.error(f"[{error.returncode}]: {result}")
+            else:
+                debugger.error(error)
 
 
 def get_gitlog(branch: str) -> List:
@@ -39,8 +44,13 @@ def get_gitlog(branch: str) -> List:
     try:
         return subprocess.check_output(f'git log --no-merges --reverse {branch}',
                                        shell=True).decode(encoding='UTF-8').splitlines()
-    except subprocess.SubprocessError as error:
-        debugger.error(error) if options['debug'] else None
+    except (subprocess.CalledProcessError, subprocess.SubprocessError, Exception) as error:
+        if options['debug']:
+            if isinstance(error, subprocess.CalledProcessError):
+                result = error.output.decode(encoding='UTF-8').strip()
+                debugger.error(f"[{error.returncode}]: {result}")
+            else:
+                debugger.error(error)
 
 
 def get_commits(trunk: str) -> int:

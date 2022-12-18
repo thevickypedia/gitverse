@@ -33,7 +33,7 @@ def read(name: str) -> str:
 setup(
     name='changelog-generator',
     version='.'.join(str(c) for c in version_info),
-    description='Python module to, generate CHANGELOG from git commit history.',
+    description='Python module to, generate well formatted commit notes from git commit history.',
     long_description=read('README.md'),
     url='https://github.com/thevickypedia/changelog-generator',
     author='Vignesh Sivanandha Rao',
@@ -43,6 +43,8 @@ setup(
     keywords='changelog, commits, automate',
     packages=['.changemaker'],
     install_requires=['click'],
+    include_package_data=True,
+    python_requires=">=3.7",
     entry_points={
             'console_scripts': [
                 'changelog = changemaker.generator:main'

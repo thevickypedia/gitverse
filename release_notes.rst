@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+0.3.2 (12/18/2022)
+------------------
+- Update setup.py to include utils package
+
 0.3.1 (12/17/2022)
 ------------------
 - Make title underline consistent across any title

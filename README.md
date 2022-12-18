@@ -1,5 +1,5 @@
 [![Pypi-version](https://img.shields.io/pypi/v/changelog-generator)](https://pypi.org/project/changelog-generator)
-![Python](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)
+![Python](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)
 
 [![pages-build-deployment](https://github.com/thevickypedia/changelog-generator/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/thevickypedia/changelog-generator/actions/workflows/pages/pages-build-deployment)
 [![pypi](https://github.com/thevickypedia/changelog-generator/actions/workflows/python-publish.yml/badge.svg)](https://github.com/thevickypedia/changelog-generator/actions/workflows/python-publish.yml)

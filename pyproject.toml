@@ -1,0 +1,50 @@
+[project]
+name = "changelog-generator"
+dynamic = ["version"]
+description = "Python module to, generate well formatted commit notes from git commit history."
+readme = "README.md"
+authors = [{ name = "Vignesh Sivanandha Rao", email = "svignesh1793@gmail.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: MacOS :: MacOS X",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.9",
+    "Topic :: Software Development :: Version Control :: Git",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows :: Windows 10",
+    "Operating System :: Microsoft :: Windows :: Windows 11",
+    "Topic :: Documentation :: Sphinx"
+]
+keywords = ["changelog", "automate", "commits"]
+requires-python = ">=3.7"
+dependencies = ["click"]
+
+[tool.setuptools]
+packages = ["changemaker"]
+
+[tool.setuptools.dynamic]
+version = {attr = "changemaker.version"}
+
+[build-system]
+requires      = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+dev = ["pre-commit", "xmltodict"]
+
+[project.scripts]
+changelog = "changemaker.generator:main"
+
+[project.urls]
+Homepage = "https://github.com/thevickypedia/changelog-generator"
+Docs = "https://thevickypedia.github.io/changelog-generator/"
+Source = "https://github.com/thevickypedia/changelog-generator"
+"Bug Tracker" = "https://github.com/thevickypedia/changelog-generator/issues"
+"Release Notes" = "https://github.com/thevickypedia/changelog-generator/blob/main/release_notes.rst"

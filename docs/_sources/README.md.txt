@@ -7,7 +7,7 @@
 [![Pypi-format](https://img.shields.io/pypi/format/changelog-generator)](https://pypi.org/project/changelog-generator/#files)
 [![Pypi-status](https://img.shields.io/pypi/status/changelog-generator)](https://pypi.org/project/changelog-generator)
 
-![Maintained](https://img.shields.io/maintenance/yes/2022)
+![Maintained](https://img.shields.io/maintenance/yes/2023)
 [![GitHub Repo created](https://img.shields.io/date/1630367571)](https://api.github.com/repos/thevickypedia/changelog-generator)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/thevickypedia/changelog-generator)](https://api.github.com/repos/thevickypedia/changelog-generator)
 [![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/changelog-generator)](https://api.github.com/repos/thevickypedia/changelog-generator)
@@ -15,15 +15,12 @@
 # CHANGELOG generator
 Generate CHANGELOG from git commit history
 
-### Pypi Module
-[https://pypi.org/project/changelog-generator/][pypi]
-
-### Usage
-###### Navigate to the repository and run:
+### Installation
 ```shell
 pip install changelog-generator
 ```
 
+### Usage
 ###### Regular CHANGELOG
 ```shell
 changelog
@@ -47,15 +44,28 @@ changelog reverse
 #### Sample
 [release_notes.rst][release_notes]
 
-### Pre-Commit
-Install `pre-commit` to run `flake8` and `isort` for linting and `sphinx` for documentation generator.
+### Linting
+`PreCommit` will ensure linting, and the doc creation are run on every commit.
 
-`pip install --no-cache --upgrade sphinx pre-commit recommonmark`
+**Requirement**
+```shell
+pip install sphinx==5.1.1 pre-commit==2.20.0 recommonmark==0.7.1
+```
 
-`pre-commit run --all-files`
+**Usage**
+```shell
+pre-commit run --all-files
+```
+
+## Pypi Package
+[![pypi-module](https://img.shields.io/badge/Software%20Repository-pypi-1f425f.svg)](https://packaging.python.org/tutorials/packaging-projects/)
+
+[https://pypi.org/project/changelog-generator/][pypi]
 
 ### Runbook
-[GitHub Docs][runbook]
+[![made-with-sphinx-doc](https://img.shields.io/badge/Code%20Docs-Sphinx-1f425f.svg)](https://www.sphinx-doc.org/en/master/man/sphinx-autogen.html)
+
+[https://thevickypedia.github.io/changelog-generator/][runbook]
 
 ## License & copyright
 

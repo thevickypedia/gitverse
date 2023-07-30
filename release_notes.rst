@@ -1,6 +1,11 @@
 Release Notes
 =============
 
+0.3.3 (12/30/2023)
+------------------
+- Convert to ``pyproject.toml``
+- Update type hint, logging, and runtime
+
 0.3.2 (12/18/2022)
 ------------------
 - Update setup.py to include utils package

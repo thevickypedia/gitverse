@@ -2,16 +2,16 @@ import os
 import subprocess
 import time
 from datetime import datetime
-from typing import List, NoReturn, Union
+from typing import List, NoReturn
 
 import click
 
 from changemaker import debugger
 
-options = {'debug': False, 'reverse': False}
+options = {'debug': False, 'reverse': False, 'start': 0.0}
 
 
-def get_branches() -> List:
+def get_branches() -> List[str]:
     """Runs ``git branch`` command to get the branches available for the repo.
 
     Returns:
@@ -31,7 +31,7 @@ def get_branches() -> List:
                 debugger.error(error)
 
 
-def get_gitlog(branch: str) -> List:
+def get_gitlog(branch: str) -> List[str]:
     """Runs the command ``git log`` to get the all commit messages excluding merges and in reverse order.
 
     Args:
@@ -72,7 +72,7 @@ def get_commits(trunk: str) -> int:
         debugger.error(error) if options['debug'] else None
 
 
-def generator(versions: List[str], gitlog: List[str]) -> Union[List[str], None]:
+def generator(versions: List[str], gitlog: List[str]) -> List[str]:
     """Triggers the conversion process.
 
     Returns:
@@ -133,14 +133,14 @@ def run(branch: str, filename: str, title: str) -> NoReturn:
         debugger.error('No commit message found.') if options['debug'] else None
         return
 
-    debugger.info(f'Generating {filename!r}') if options['debug'] else None
+    debugger.info('Generating snippets') if options['debug'] else None
     snippets = generator(gitlog=gitlog,
                          versions=['.'.join(v for v in "{:03d}".format(n)) for n in range(1, commits + 1)])
     if not snippets:
         return
 
     if options['reverse']:
-        debugger.warning(f'Generating {filename!r} from commit history in reverse order.') if options['debug'] else None
+        debugger.warning('Converting snippets to reverse order') if options['debug'] else None
         snippets.reverse()
 
     if os.path.isfile(filename):
@@ -150,7 +150,8 @@ def run(branch: str, filename: str, title: str) -> NoReturn:
         file.write('%s\n%s\n\n' % (title, '=' * len(title)))
         for index, each_snippet in enumerate(snippets):
             file.write(f'{each_snippet}\n' if index + 1 < len(snippets) else each_snippet)
-    debugger.info(f'{filename!r} was created in: {round(float(time.perf_counter()), 2)}s') if options['debug'] else None
+    if options['debug']:
+        debugger.info(f"{filename!r} was created in: {round(float(time.time() - options['start']), 2)}s")
 
 
 @click.command()
@@ -192,6 +193,7 @@ def main(*args, reverse: str = None, debug: str = None,
         filename = 'CHANGELOG'
     if title is None:
         title = 'Change Log'
+    options['start'] = time.time()
     run(branch=branch, filename=filename, title=title)
 
 

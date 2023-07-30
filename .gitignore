@@ -4,3 +4,6 @@ venv
 source_change_log.txt
 _build
 local_build.py
+dist
+*.egg-info
+build

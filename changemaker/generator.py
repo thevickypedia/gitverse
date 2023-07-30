@@ -7,6 +7,7 @@ from typing import List, NoReturn
 import click
 
 from changemaker import debugger
+from changemaker import version as pkg_version
 
 options = {'debug': False, 'reverse': False, 'start': 0.0}
 
@@ -158,10 +159,11 @@ def run(branch: str, filename: str, title: str) -> NoReturn:
 @click.pass_context
 @click.argument('reverse', required=False)
 @click.argument('debug', required=False)
+@click.option("-v", "--version", required=False, is_flag=True, help="Get version of the package")
 @click.option("-b", "--branch", help="The branch to read the commit notes from")
 @click.option("-f", "--filename", help="Filename where the commit notes should be stored")
 @click.option("-t", "--title", help="Title under which the commit notes should be stored")
-def main(*args, reverse: str = None, debug: str = None,
+def main(*args, reverse: str = None, debug: str = None, version: str = None,
          branch: str = None, filename: str = None, title: str = None) -> None:
     """Generate a reStructuredText/Markdown file using github commit notes.
 
@@ -169,6 +171,9 @@ def main(*args, reverse: str = None, debug: str = None,
 
     Run 'changelog debug' to enable debug mode.
     """
+    if version:
+        debugger.info(pkg_version)
+        return
     reverse = reverse or ''
     debug = debug or ''
 

@@ -1,6 +1,11 @@
 Release Notes
 =============
 
+0.3.4 (12/30/2023)
+------------------
+- Add ``version`` argument
+- Set module to stable
+
 0.3.3 (12/30/2023)
 ------------------
 - Convert to ``pyproject.toml``

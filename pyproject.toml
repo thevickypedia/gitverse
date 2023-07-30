@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [{ name = "Vignesh Sivanandha Rao", email = "svignesh1793@gmail.com" }]
 license = { file = "LICENSE" }
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Operating System :: MacOS :: MacOS X",
     "License :: OSI Approved :: MIT License",

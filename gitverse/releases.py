@@ -66,39 +66,20 @@ def get_releases() -> Union[List[Dict[str, Union[str, List[str], int, str]]], No
     if not tags:
         debugger.error("Failed to fetch tags information.") if options['debug'] else None
         return
-    version_updates = []
     current_version = None
-    current_changes = []
+    version_updates = {}
     for tag in tags:
-        tag = tag.strip()
-        if tag:
-            # Continuation of changes for the current version
-            if tag.startswith((".", "-")) or tag.split()[0].isalpha():
-                current_changes.append(tag.lstrip(".- "))
-            else:  # New version entry
-                if current_version is not None:
-                    version_updates.append(
-                        {
-                            "version": current_version,
-                            "description": current_changes,
-                            "timestamp": dates[current_version],
-                            "date": datetime.fromtimestamp(dates[current_version]).strftime("%m/%d/%Y")
-                        }
-                    )
-                version, changes = tag.split(None, 1)
-                current_version = version
-                current_changes = [changes]
-
-    # Add the last version entry
-    if current_version is not None:
-        version_updates.append(
-            {
-                "version": current_version,
-                "description": current_changes,
-                "timestamp": dates[current_version],
-                "date": datetime.fromtimestamp(dates[current_version]).strftime("%m/%d/%Y")
-            }
-        )
+        if tag.split()[0] in dates.keys():
+            current_version = tag.split()[0]
+            version_updates[current_version] = {
+                    "version": current_version,
+                    "description": [' '.join(tag.split()[1:])],
+                    "timestamp": dates[current_version],
+                    "date": datetime.fromtimestamp(dates[current_version]).strftime("%m/%d/%Y")
+                }
+        else:
+            version_updates[current_version]['description'].append(tag.strip())  # adds next line to previous desc
+    version_updates = list(version_updates.values())
     if options['reverse']:
         debugger.warning('Converting snippets to reverse order') if options['debug'] else None
         version_updates = sorted(version_updates, key=lambda x: x['timestamp'], reverse=True)

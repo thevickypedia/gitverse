@@ -1,6 +1,11 @@
 Commit History
 ==============
 
+0.3.7 (08/10/2023)
+------------------
+- Generate release notes based on version tags
+- Bump to beta version
+
 0.3.6 (08/09/2023)
 ------------------
 - Update more references

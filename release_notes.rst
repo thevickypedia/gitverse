@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+2.1 (08/10/2023)
+----------------
+- Performance improvements and more clear logging
+
 2.0 (08/10/2023)
 ----------------
 - Release v2.0

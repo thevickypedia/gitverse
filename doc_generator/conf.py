@@ -13,12 +13,12 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('..' + os.path.sep + 'gitverse'))
+sys.path.insert(0, os.path.abspath('..'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'Changelog Generator'
+project = 'GitVerse'
 copyright = '2021, Vignesh Sivanandha Rao'
 author = 'Vignesh Sivanandha Rao'
 

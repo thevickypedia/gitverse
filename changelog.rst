@@ -1,6 +1,13 @@
 Commit History
 ==============
 
+0.4.1 (08/10/2023)
+------------------
+- Reuse options via callables.py
+- Reduce the usage of conditional debug
+- Add more debug statements
+- Update docs and bump version
+
 0.4.0 (08/10/2023)
 ------------------
 - Release v2.0

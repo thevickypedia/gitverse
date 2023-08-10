@@ -10,8 +10,7 @@ import requests
 
 from gitverse import debugger
 from gitverse import version as pkg_version
-
-options = {'debug': False, 'reverse': False, 'start': 0.0}
+from gitverse.callables import options
 
 
 def get_api_releases() -> Dict[str, List[str]]:
@@ -28,14 +27,16 @@ def get_api_releases() -> Dict[str, List[str]]:
         headers = {}
         if gh_token:
             headers['Authorization'] = f'Bearer {gh_token}'
+        else:
+            debugger.warning("Trying to collect release notes without github token")
         response = requests.get(f'https://api.github.com/repos/{owner}/{repo_name}/releases', headers=headers)
         if response.ok:
+            debugger.info("Collected release notes via GitHub API")
             try:
                 return {resp['name']: resp['body'].splitlines() for resp in response.json()}
             except requests.JSONDecodeError as error:
-                if options['debug']:
-                    debugger.error(error)
-        elif options['debug']:
+                debugger.error(error)
+        else:
             debugger.error(f"{response.status_code} - {response.text}")
 
 
@@ -55,12 +56,11 @@ def run_git_cmd(cmd: str, raw: bool = False) -> Union[str, List[str]]:
             return output
         return output.splitlines()
     except (subprocess.CalledProcessError, subprocess.SubprocessError, Exception) as error:
-        if options['debug']:
-            if isinstance(error, subprocess.CalledProcessError):
-                result = error.output.decode(encoding='UTF-8').strip()
-                debugger.error(f"[{error.returncode}]: {result}")
-            else:
-                debugger.error(error)
+        if isinstance(error, subprocess.CalledProcessError):
+            result = error.output.decode(encoding='UTF-8').strip()
+            debugger.error(f"[{error.returncode}]: {result}")
+        else:
+            debugger.error(error)
 
 
 def get_dates() -> Dict[str, int]:
@@ -86,10 +86,10 @@ def get_releases() -> Union[List[Dict[str, Union[str, List[str], int, str]]], No
     dates = get_dates()
     tags = run_git_cmd(cmd='git tag -l -n99')
     if not dates:
-        debugger.error("Failed to fetch dates information.") if options['debug'] else None
+        debugger.error("Failed to fetch dates information.")
         return
     if not tags:
-        debugger.error("Failed to fetch tags information.") if options['debug'] else None
+        debugger.error("Failed to fetch tags information.")
         return
     current_version = None
     version_updates = {}
@@ -105,13 +105,17 @@ def get_releases() -> Union[List[Dict[str, Union[str, List[str], int, str]]], No
         elif current_version:
             version_updates[current_version]['description'].append(tag.strip())  # adds next line to previous desc
     version_updates = list(version_updates.values())
+    debugger.info(f"Git tags gathered: {len(version_updates)}")
+    if len(version_updates) != len(dates):
+        debugger.error("Git tag has a conflict with the number of tags and dates present.")
     # Update release notes for each version, if available via GitHub API
     if release_api := get_api_releases():
+        debugger.info(f"Release notes gathered: {len(release_api)}")
         for version_update in version_updates:
             if api_description := release_api.get(version_update['version']):
                 version_update['description'] = api_description
     if options['reverse']:
-        debugger.warning('Converting snippets to reverse order') if options['debug'] else None
+        debugger.warning('Converting snippets to reverse order')
         version_updates = sorted(version_updates, key=lambda x: x['timestamp'], reverse=True)
     else:
         version_updates = sorted(version_updates, key=lambda x: x['timestamp'])
@@ -156,14 +160,13 @@ def run(filename: str, title: str) -> NoReturn:
     if not snippets:
         return
     if os.path.isfile(filename):
-        debugger.warning(f'WARNING: Found existing {filename!r}. Recreating now.') if options['debug'] else None
+        debugger.warning(f'WARNING: Found existing {filename!r}. Recreating now.')
         os.remove(filename)
     with open(filename, 'a') as file:
         file.write('%s\n%s\n\n' % (title, '=' * len(title)))
         for index, each_snippet in enumerate(snippets):
             file.write(f'{each_snippet}\n' if index + 1 < len(snippets) else each_snippet)
-    if options['debug']:
-        debugger.info(f"{filename!r} was created in: {round(float(time.time() - options['start']), 2)}s")
+    debugger.info(f"{filename!r} was created in: {round(float(time.time() - options['start']), 2)}s")
 
 
 @click.command()

@@ -1,21 +1,27 @@
-from click import secho
+import click
+
+from gitverse.callables import options
 
 
 def debug(msg):
     """Print the incoming message in light green."""
-    secho(message=msg, fg='green')
+    if options['debug']:
+        click.secho(message=msg, fg='green')
 
 
 def info(msg):
     """Print the incoming message in bright green."""
-    secho(message=msg, fg='bright_green')
+    if options['debug']:
+        click.secho(message=msg, fg='bright_green')
 
 
 def warning(msg):
     """Print the incoming message in bright yellow."""
-    secho(message=msg, fg='bright_yellow')
+    if options['debug']:
+        click.secho(message=msg, fg='bright_yellow')
 
 
 def error(msg):
     """Print the incoming message in bright red."""
-    secho(message=msg, fg='bright_red')
+    if options['debug']:
+        click.secho(message=msg, fg='bright_red')

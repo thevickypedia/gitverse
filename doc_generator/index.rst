@@ -15,28 +15,28 @@ Welcome to GitVerse's documentation!
 ReleaseNotes
 ============
 
-.. automodule:: releases
+.. automodule:: gitverse.releases
    :members:
    :undoc-members:
 
 CommitHistory
 =============
 
-.. automodule:: commits
+.. automodule:: gitverse.commits
    :members:
    :undoc-members:
 
 Debugger
 ========
 
-.. automodule:: debugger
+.. automodule:: gitverse.debugger
    :members:
    :undoc-members:
 
 RST Parser
 ==========
 
-.. automodule:: utils.rst
+.. automodule:: gitverse.utils.rst
    :members:
    :undoc-members:
 

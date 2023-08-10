@@ -8,8 +8,7 @@ import click
 
 from gitverse import debugger
 from gitverse import version as pkg_version
-
-options = {'debug': False, 'reverse': False, 'start': 0.0}
+from gitverse.callables import options
 
 
 def get_branches() -> List[str]:
@@ -24,12 +23,11 @@ def get_branches() -> List[str]:
                                            shell=True).decode(encoding='UTF-8').replace('* ', '').strip().splitlines()
         return branches
     except (subprocess.CalledProcessError, subprocess.SubprocessError, Exception) as error:
-        if options['debug']:
-            if isinstance(error, subprocess.CalledProcessError):
-                result = error.output.decode(encoding='UTF-8').strip()
-                debugger.error(f"[{error.returncode}]: {result}")
-            else:
-                debugger.error(error)
+        if isinstance(error, subprocess.CalledProcessError):
+            result = error.output.decode(encoding='UTF-8').strip()
+            debugger.error(f"[{error.returncode}]: {result}")
+        else:
+            debugger.error(error)
 
 
 def get_gitlog(branch: str) -> List[str]:
@@ -46,12 +44,11 @@ def get_gitlog(branch: str) -> List[str]:
         return subprocess.check_output(f'git log --no-merges --reverse {branch}',
                                        shell=True).decode(encoding='UTF-8').splitlines()
     except (subprocess.CalledProcessError, subprocess.SubprocessError, Exception) as error:
-        if options['debug']:
-            if isinstance(error, subprocess.CalledProcessError):
-                result = error.output.decode(encoding='UTF-8').strip()
-                debugger.error(f"[{error.returncode}]: {result}")
-            else:
-                debugger.error(error)
+        if isinstance(error, subprocess.CalledProcessError):
+            result = error.output.decode(encoding='UTF-8').strip()
+            debugger.error(f"[{error.returncode}]: {result}")
+        else:
+            debugger.error(error)
 
 
 def get_commits(trunk: str) -> int:
@@ -67,10 +64,10 @@ def get_commits(trunk: str) -> int:
     try:
         commits = int(subprocess.check_output(f"git rev-list --count {trunk}",
                                               shell=True).decode('utf-8').splitlines()[0])
-        debugger.info(f'Number of commits: {commits}') if options['debug'] else None
+        debugger.info(f'Number of commits: {commits}')
         return commits
     except subprocess.SubprocessError as error:
-        debugger.error(error) if options['debug'] else None
+        debugger.error(error)
 
 
 def generator(versions: List[str], gitlog: List[str]) -> List[str]:
@@ -116,43 +113,42 @@ def run(branch: str, filename: str, title: str) -> NoReturn:
     """
     branches = get_branches()
     if branch and branch not in branches:
-        debugger.error(f"{branch!r} is not available.") if options['debug'] else None
-        debugger.info(f"Available branches: {', '.join(branches)}") if options['debug'] else None
+        debugger.error(f"{branch!r} is not available.")
+        debugger.info(f"Available branches: {', '.join(branches)}")
         return
     elif not branch:
         branch = 'main' if 'main' in branches else 'master'
-    debugger.info(f'Identified trunk branch to be {branch!r}') if options['debug'] else None
+    debugger.info(f'Identified trunk branch to be {branch!r}')
 
-    debugger.info(f'Getting commit history for branch {branch!r}') if options['debug'] else None
+    debugger.info(f'Getting commit history for branch {branch!r}')
     commits = get_commits(trunk=branch)
     if not commits:
         return
 
-    debugger.info(f'Getting git log for the branch {branch!r}') if options['debug'] else None
+    debugger.info(f'Getting git log for the branch {branch!r}')
     gitlog = get_gitlog(branch=branch)
     if not gitlog:
-        debugger.error('No commit message found.') if options['debug'] else None
+        debugger.error('No commit message found.')
         return
 
-    debugger.info('Generating snippets') if options['debug'] else None
+    debugger.info('Generating snippets')
     snippets = generator(gitlog=gitlog,
                          versions=['.'.join(v for v in "{:03d}".format(n)) for n in range(1, commits + 1)])
     if not snippets:
         return
 
     if options['reverse']:
-        debugger.warning('Converting snippets to reverse order') if options['debug'] else None
+        debugger.warning('Converting snippets to reverse order')
         snippets.reverse()
 
     if os.path.isfile(filename):
-        debugger.warning(f'WARNING: Found existing {filename!r}. Recreating now.') if options['debug'] else None
+        debugger.warning(f'WARNING: Found existing {filename!r}. Recreating now.')
         os.remove(filename)
     with open(filename, 'a') as file:
         file.write('%s\n%s\n\n' % (title, '=' * len(title)))
         for index, each_snippet in enumerate(snippets):
             file.write(f'{each_snippet}\n' if index + 1 < len(snippets) else each_snippet)
-    if options['debug']:
-        debugger.info(f"{filename!r} was created in: {round(float(time.time() - options['start']), 2)}s")
+    debugger.info(f"{filename!r} was created in: {round(float(time.time() - options['start']), 2)}s")
 
 
 @click.command()

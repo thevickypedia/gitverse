@@ -5,6 +5,7 @@ from datetime import datetime
 from typing import Dict, List, NoReturn, Union
 
 import click
+import dotenv
 import requests
 
 from gitverse import debugger
@@ -172,8 +173,9 @@ def run(filename: str, title: str) -> NoReturn:
 @click.option("-v", "--version", required=False, is_flag=True, help="Get version of the package")
 @click.option("-f", "--filename", help="Filename where the commit notes should be stored")
 @click.option("-t", "--title", help="Title under which the commit notes should be stored")
+@click.option("-e", "--env", help="Filename/filepath for .env file to load the environment variables")
 def main(*args, reverse: str = None, debug: str = None,
-         version: str = None, filename: str = None, title: str = None) -> None:
+         version: str = None, filename: str = None, title: str = None, env: str = None) -> None:
     """Generate a reStructuredText/Markdown file using github releases.
 
     Run 'gitverse-commit reverse' to generate release notes in reverse order.
@@ -183,6 +185,7 @@ def main(*args, reverse: str = None, debug: str = None,
     if version:
         debugger.info(pkg_version)
         return
+    options['start'] = time.time()
     reverse = reverse or ''
     debug = debug or ''
 
@@ -208,7 +211,12 @@ def main(*args, reverse: str = None, debug: str = None,
         filename = 'ReleaseNotes'
     if title is None:
         title = 'Release Notes'
-    options['start'] = time.time()
+    if env is None:
+        env = '.env'
+    kwargs = dict(dotenv_path=env, override=True, verbose=False)
+    if options['debug']:
+        kwargs['verbose'] = True
+    dotenv.load_dotenv(**kwargs)
     run(filename=filename, title=title)
 
 

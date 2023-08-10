@@ -1,6 +1,10 @@
 Commit History
 ==============
 
+0.3.9 (08/10/2023)
+------------------
+- Add python dotenv to load env vars
+
 0.3.8 (08/10/2023)
 ------------------
 - Get it to a better state

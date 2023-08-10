@@ -24,7 +24,7 @@ classifiers = [
 ]
 keywords = ["changelog", "automate", "commits", "releases"]
 requires-python = ">=3.8"
-dependencies = ["click", "requests"]
+dependencies = ["click", "requests", "python-dotenv"]
 
 [tool.setuptools]
 packages = ["gitverse"]

@@ -1,6 +1,17 @@
 Release Notes
 =============
 
+2.0b (08/10/2023)
+-----------------
+- Use ``python-dotenv`` to load env vars for ``git_token``
+- Add CLI option to pass filename/filepath for dot env
+
+2.0a (08/10/2023)
+-----------------
+- Use ``git pull`` before any operation
+- Make an API call to github to get accurate release information (if available)
+- Improve accuracy
+
 0.7 (07/30/2023)
 ----------------
 - Add ``version`` argument

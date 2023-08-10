@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Welcome to Changelog Generator’s documentation! &#8212; Changelog Generator  documentation</title>
+    <title>Welcome to GitVerse’s documentation! &#8212; Changelog Generator  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/classic.css" />
     
@@ -18,7 +18,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="CHANGELOG generator" href="README.html" /> 
+    <link rel="next" title="GitVerse" href="README.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,10 +30,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="README.html" title="CHANGELOG generator"
+          <a href="README.html" title="GitVerse"
              accesskey="N">next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">Changelog Generator  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Welcome to Changelog Generator’s documentation!</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Welcome to GitVerse’s documentation!</a></li> 
       </ul>
     </div>  
 
@@ -42,12 +42,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="welcome-to-changelog-generator-s-documentation">
-<h1>Welcome to Changelog Generator’s documentation!<a class="headerlink" href="#welcome-to-changelog-generator-s-documentation" title="Permalink to this heading">¶</a></h1>
+  <section id="welcome-to-gitverse-s-documentation">
+<h1>Welcome to GitVerse’s documentation!<a class="headerlink" href="#welcome-to-gitverse-s-documentation" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Read Me:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="README.html">CHANGELOG generator</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="README.html">GitVerse</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="README.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="README.html#usage">Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="README.html#linting">Linting</a></li>
@@ -58,8 +58,161 @@
 </ul>
 </div>
 </section>
-<section id="changelog-generator">
-<h1>CHANGELOG Generator<a class="headerlink" href="#changelog-generator" title="Permalink to this heading">¶</a></h1>
+<section id="module-releases">
+<span id="releasenotes"></span><h1>ReleaseNotes<a class="headerlink" href="#module-releases" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="releases.generate_snippets">
+<span class="sig-prename descclassname"><span class="pre">releases.</span></span><span class="sig-name descname"><span class="pre">generate_snippets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#releases.generate_snippets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate snippets based on the releases information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of snippets ready to be loaded into a markdown or rst file.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="releases.get_dates">
+<span class="sig-prename descclassname"><span class="pre">releases.</span></span><span class="sig-name descname"><span class="pre">get_dates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#releases.get_dates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get timestamp for each release.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns the release version and the timestamp as key-value pairs.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict[str, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="releases.get_releases">
+<span class="sig-prename descclassname"><span class="pre">releases.</span></span><span class="sig-name descname"><span class="pre">get_releases</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#releases.get_releases" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get releases mapped with the timestamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns all the releases information as list of dictionaries.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Union[List[Dict[str, Union[str, List[str], int, str]]], None]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="releases.run">
+<span class="sig-prename descclassname"><span class="pre">releases.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#releases.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler for generator functions that writes the release notes into a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – Name of the file that where the release notes has to be stored.</p></li>
+<li><p><strong>title</strong> – Title under which the release notes has to be stored.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="releases.run_git_cmd">
+<span class="sig-prename descclassname"><span class="pre">releases.</span></span><span class="sig-name descname"><span class="pre">run_git_cmd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#releases.run_git_cmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the git command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Takes the command as an argument.</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the output of the git command split by lines.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-commits">
+<span id="commithistory"></span><h1>CommitHistory<a class="headerlink" href="#module-commits" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="commits.generator">
+<span class="sig-prename descclassname"><span class="pre">commits.</span></span><span class="sig-name descname"><span class="pre">generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">versions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gitlog</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#commits.generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Triggers the conversion process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of snippets that has to be written to the output file.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="commits.get_branches">
+<span class="sig-prename descclassname"><span class="pre">commits.</span></span><span class="sig-name descname"><span class="pre">get_branches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#commits.get_branches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code> command to get the branches available for the repo.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of branches available.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="commits.get_commits">
+<span class="sig-prename descclassname"><span class="pre">commits.</span></span><span class="sig-name descname"><span class="pre">get_commits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trunk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#commits.get_commits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scans for the number of commits in the <code class="docutils literal notranslate"><span class="pre">trunk</span></code> branch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>trunk</strong> – Branch name.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of commits.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="commits.get_gitlog">
+<span class="sig-prename descclassname"><span class="pre">commits.</span></span><span class="sig-name descname"><span class="pre">get_gitlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#commits.get_gitlog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> to get the all commit messages excluding merges and in reverse order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>branch</strong> – Branch name.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the output of gitlog as a list.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="commits.run">
+<span class="sig-prename descclassname"><span class="pre">commits.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#commits.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler for generator functions that writes the commit history into a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>branch</strong> – Name of the branch.</p></li>
+<li><p><strong>filename</strong> – Name of the file that where the commit history has to be stored.</p></li>
+<li><p><strong>title</strong> – Title under which the commit history has to be stored.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-debugger">
 <span id="debugger"></span><h1>Debugger<a class="headerlink" href="#module-debugger" title="Permalink to this heading">¶</a></h1>
@@ -170,8 +323,9 @@
   <div>
     <h3><a href="#">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Welcome to Changelog Generator’s documentation!</a></li>
-<li><a class="reference internal" href="#changelog-generator">CHANGELOG Generator</a></li>
+<li><a class="reference internal" href="#">Welcome to GitVerse’s documentation!</a></li>
+<li><a class="reference internal" href="#module-releases">ReleaseNotes</a></li>
+<li><a class="reference internal" href="#module-commits">CommitHistory</a></li>
 <li><a class="reference internal" href="#module-debugger">Debugger</a></li>
 <li><a class="reference internal" href="#module-utils.rst">RST Parser</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
@@ -181,7 +335,7 @@
   <div>
     <h4>Next topic</h4>
     <p class="topless"><a href="README.html"
-                          title="next chapter">CHANGELOG generator</a></p>
+                          title="next chapter">GitVerse</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -214,10 +368,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="README.html" title="CHANGELOG generator"
+          <a href="README.html" title="GitVerse"
              >next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">Changelog Generator  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Welcome to Changelog Generator’s documentation!</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Welcome to GitVerse’s documentation!</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

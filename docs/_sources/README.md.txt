@@ -2,7 +2,7 @@
 ![Python](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)
 
 [![pages-build-deployment](https://github.com/thevickypedia/gitverse/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/thevickypedia/gitverse/actions/workflows/pages/pages-build-deployment)
-[![pypi](https://github.com/thevickypedia/gitverse/actions/workflows/python-publish.yml/badge.svg)](https://github.com/thevickypedia/gitverse/actions/workflows/python-publish.yml)
+[![pypi-publish](https://github.com/thevickypedia/gitverse/actions/workflows/python-publish.yml/badge.svg)](https://github.com/thevickypedia/gitverse/actions/workflows/python-publish.yml)
 
 [![Pypi-format](https://img.shields.io/pypi/format/gitverse)](https://pypi.org/project/gitverse/#files)
 [![Pypi-status](https://img.shields.io/pypi/status/gitverse)](https://pypi.org/project/gitverse)
@@ -12,8 +12,7 @@
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/thevickypedia/gitverse)](https://api.github.com/repos/thevickypedia/gitverse)
 [![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/gitverse)](https://api.github.com/repos/thevickypedia/gitverse)
 
-# CHANGELOG generator
-Generate CHANGELOG from git commit history
+# GitVerse
 
 ### Installation
 ```shell
@@ -21,14 +20,16 @@ pip install gitverse
 ```
 
 ### Usage
+#### Release Notes (Tags)
+Generate release notes from releases tagged in GitHub
+```shell
+gitverse-release
+```
+
+Generate commit history from git log
 #### Commit History
 ```shell
 gitverse-commit
-```
-
-#### Release Notes (Tags)
-```shell
-gitverse-release
 ```
 
 ##### Options
@@ -36,9 +37,9 @@ gitverse-release
 - `reverse` - Generate commit history/release notes in reverse order.
 
 ##### Flags
-- `-b` Gather commit notes specific to a branch. Uses `Default branch` if not passed
-- `-f` Write the commit notes to a custom filename. Defaults to `CHANGELOG`
-- `-t` Title or index line for the file generated. Defaults to `Change Log`
+- `-b` Gather commit notes specific to a branch. Uses `Default branch` if not passed. (Only for `gitverse-commit`)
+- `-f` Write the commit notes to a custom filename.
+- `-t` Title or index line for the file generated.
 
 #### Sample
 [release_notes.rst][release_notes]

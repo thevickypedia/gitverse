@@ -1,6 +1,10 @@
 Commit History
 ==============
 
+0.3.6 (08/09/2023)
+------------------
+- Update more references
+
 0.3.5 (08/09/2023)
 ------------------
 - Add an option to generate release notes

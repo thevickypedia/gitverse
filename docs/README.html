@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>CHANGELOG generator &#8212; Changelog Generator  documentation</title>
+    <title>GitVerse &#8212; Changelog Generator  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/classic.css" />
     
@@ -18,7 +18,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Welcome to Changelog Generator’s documentation!" href="index.html" /> 
+    <link rel="prev" title="Welcome to GitVerse’s documentation!" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,10 +30,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to Changelog Generator’s documentation!"
+          <a href="index.html" title="Welcome to GitVerse’s documentation!"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Changelog Generator  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">CHANGELOG generator</a></li> 
+        <li class="nav-item nav-item-this"><a href="">GitVerse</a></li> 
       </ul>
     </div>  
 
@@ -45,16 +45,15 @@
   <p><a class="reference external" href="https://pypi.org/project/gitverse"><img alt="Pypi-version" src="https://img.shields.io/pypi/v/gitverse" /></a>
 <img alt="Python" src="https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue" /></p>
 <p><a class="reference external" href="https://github.com/thevickypedia/gitverse/actions/workflows/pages/pages-build-deployment"><img alt="pages-build-deployment" src="https://github.com/thevickypedia/gitverse/actions/workflows/pages/pages-build-deployment/badge.svg" /></a>
-<a class="reference external" href="https://github.com/thevickypedia/gitverse/actions/workflows/python-publish.yml"><img alt="pypi" src="https://github.com/thevickypedia/gitverse/actions/workflows/python-publish.yml/badge.svg" /></a></p>
+<a class="reference external" href="https://github.com/thevickypedia/gitverse/actions/workflows/python-publish.yml"><img alt="pypi-publish" src="https://github.com/thevickypedia/gitverse/actions/workflows/python-publish.yml/badge.svg" /></a></p>
 <p><a class="reference external" href="https://pypi.org/project/gitverse/#files"><img alt="Pypi-format" src="https://img.shields.io/pypi/format/gitverse" /></a>
 <a class="reference external" href="https://pypi.org/project/gitverse"><img alt="Pypi-status" src="https://img.shields.io/pypi/status/gitverse" /></a></p>
 <p><img alt="Maintained" src="https://img.shields.io/maintenance/yes/2023" />
 <a class="reference external" href="https://api.github.com/repos/thevickypedia/gitverse"><img alt="GitHub Repo created" src="https://img.shields.io/date/1630367571" /></a>
 <a class="reference external" href="https://api.github.com/repos/thevickypedia/gitverse"><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/thevickypedia/gitverse" /></a>
 <a class="reference external" href="https://api.github.com/repos/thevickypedia/gitverse"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/thevickypedia/gitverse" /></a></p>
-<section id="changelog-generator">
-<h1>CHANGELOG generator<a class="headerlink" href="#changelog-generator" title="Permalink to this heading">¶</a></h1>
-<p>Generate CHANGELOG from git commit history</p>
+<section id="gitverse">
+<h1>GitVerse<a class="headerlink" href="#gitverse" title="Permalink to this heading">¶</a></h1>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>gitverse
@@ -63,15 +62,17 @@
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h2>
+<section id="release-notes-tags">
+<h3>Release Notes (Tags)<a class="headerlink" href="#release-notes-tags" title="Permalink to this heading">¶</a></h3>
+<p>Generate release notes from releases tagged in GitHub</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gitverse-release
+</pre></div>
+</div>
+<p>Generate commit history from git log</p>
+</section>
 <section id="commit-history">
 <h3>Commit History<a class="headerlink" href="#commit-history" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gitverse-commit
-</pre></div>
-</div>
-</section>
-<section id="release-notes-tags">
-<h3>Release Notes (Tags)<a class="headerlink" href="#release-notes-tags" title="Permalink to this heading">¶</a></h3>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gitverse-release
 </pre></div>
 </div>
 <section id="options">
@@ -84,9 +85,9 @@
 <section id="flags">
 <h4>Flags<a class="headerlink" href="#flags" title="Permalink to this heading">¶</a></h4>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">-b</span></code> Gather commit notes specific to a branch. Uses <code class="docutils literal notranslate"><span class="pre">Default</span> <span class="pre">branch</span></code> if not passed</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code> Write the commit notes to a custom filename. Defaults to <code class="docutils literal notranslate"><span class="pre">CHANGELOG</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">-t</span></code> Title or index line for the file generated. Defaults to <code class="docutils literal notranslate"><span class="pre">Change</span> <span class="pre">Log</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-b</span></code> Gather commit notes specific to a branch. Uses <code class="docutils literal notranslate"><span class="pre">Default</span> <span class="pre">branch</span></code> if not passed. (Only for <code class="docutils literal notranslate"><span class="pre">gitverse-commit</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code> Write the commit notes to a custom filename.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-t</span></code> Title or index line for the file generated.</p></li>
 </ul>
 </section>
 </section>
@@ -135,11 +136,11 @@
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">CHANGELOG generator</a><ul>
+<li><a class="reference internal" href="#">GitVerse</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#usage">Usage</a><ul>
-<li><a class="reference internal" href="#commit-history">Commit History</a></li>
-<li><a class="reference internal" href="#release-notes-tags">Release Notes (Tags)</a><ul>
+<li><a class="reference internal" href="#release-notes-tags">Release Notes (Tags)</a></li>
+<li><a class="reference internal" href="#commit-history">Commit History</a><ul>
 <li><a class="reference internal" href="#options">Options</a></li>
 <li><a class="reference internal" href="#flags">Flags</a></li>
 </ul>
@@ -161,7 +162,7 @@
   <div>
     <h4>Previous topic</h4>
     <p class="topless"><a href="index.html"
-                          title="previous chapter">Welcome to Changelog Generator’s documentation!</a></p>
+                          title="previous chapter">Welcome to GitVerse’s documentation!</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -194,10 +195,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to Changelog Generator’s documentation!"
+          <a href="index.html" title="Welcome to GitVerse’s documentation!"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Changelog Generator  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">CHANGELOG generator</a></li> 
+        <li class="nav-item nav-item-this"><a href="">GitVerse</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

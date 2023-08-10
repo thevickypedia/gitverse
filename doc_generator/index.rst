@@ -1,9 +1,9 @@
-.. Changelog Generator documentation master file, created by
+.. GitVerse documentation master file, created by
    sphinx-quickstart on Mon Aug 30 22:50:58 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Changelog Generator's documentation!
+Welcome to GitVerse's documentation!
 ===============================================
 
 .. toctree::
@@ -12,10 +12,17 @@ Welcome to Changelog Generator's documentation!
 
    README
 
-CHANGELOG Generator
-===================
+ReleaseNotes
+============
 
-.. automodule:: generator
+.. automodule:: releases
+   :members:
+   :undoc-members:
+
+CommitHistory
+=============
+
+.. automodule:: commits
    :members:
    :undoc-members:
 

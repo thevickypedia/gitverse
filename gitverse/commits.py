@@ -6,8 +6,8 @@ from typing import List, NoReturn
 
 import click
 
-from changemaker import debugger
-from changemaker import version as pkg_version
+from gitverse import debugger
+from gitverse import version as pkg_version
 
 options = {'debug': False, 'reverse': False, 'start': 0.0}
 
@@ -167,9 +167,9 @@ def main(*args, reverse: str = None, debug: str = None, version: str = None,
          branch: str = None, filename: str = None, title: str = None) -> None:
     """Generate a reStructuredText/Markdown file using github commit notes.
 
-    Run 'changelog reverse' to generate changelog in reverse order.
+    Run 'gitverse-commit reverse' to generate gitverse-commit in reverse order.
 
-    Run 'changelog debug' to enable debug mode.
+    Run 'gitverse-commit debug' to enable debug mode.
     """
     if version:
         debugger.info(pkg_version)
@@ -177,13 +177,17 @@ def main(*args, reverse: str = None, debug: str = None, version: str = None,
     reverse = reverse or ''
     debug = debug or ''
 
+    err_msg = 'The only allowed commands are:\n' \
+              '\t1. gitverse-commit\n' \
+              '\t2. gitverse-commit reverse\n' \
+              '\t3. gitverse-commit debug'
     # The following makes arguments interchangeable for convenience
     if reverse.lower() == 'reverse':
         options['reverse'] = True
     elif reverse.lower() == 'debug':
         options['debug'] = True
     elif reverse:
-        debugger.error('The only allowed commands are:\n\t1. changelog\n\t2. changelog reverse\n\t3. changelog debug')
+        debugger.error(err_msg)
         return
 
     if debug.lower() == 'debug':
@@ -191,7 +195,7 @@ def main(*args, reverse: str = None, debug: str = None, version: str = None,
     elif debug.lower() == 'reverse':
         options['reverse'] = True
     elif debug:
-        debugger.error('The only allowed commands are:\n\t1. changelog\n\t2. changelog reverse\n\t3. changelog debug')
+        debugger.error(err_msg)
         return
 
     if filename is None:

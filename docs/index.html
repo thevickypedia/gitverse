@@ -58,85 +58,8 @@
 </ul>
 </div>
 </section>
-<section id="module-generator">
-<span id="changelog-generator"></span><h1>CHANGELOG Generator<a class="headerlink" href="#module-generator" title="Permalink to this heading">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="generator.generator">
-<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">versions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gitlog</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#generator.generator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Triggers the conversion process.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>List of snippets that has to be written to the output file.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="generator.get_branches">
-<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">get_branches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#generator.get_branches" title="Permalink to this definition">¶</a></dt>
-<dd><p>Runs <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code> command to get the branches available for the repo.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Returns a list of branches available.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="generator.get_commits">
-<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">get_commits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trunk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#generator.get_commits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Scans for the number of commits in the <code class="docutils literal notranslate"><span class="pre">trunk</span></code> branch.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>trunk</strong> – Branch name.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Number of commits.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="generator.get_gitlog">
-<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">get_gitlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#generator.get_gitlog" title="Permalink to this definition">¶</a></dt>
-<dd><p>Runs the command <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> to get the all commit messages excluding merges and in reverse order.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>branch</strong> – Branch name.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Returns the output of gitlog as a list.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="generator.run">
-<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">branch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">NoReturn</span></span></span><a class="headerlink" href="#generator.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handler for generator functions that writes the commit history into a file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>branch</strong> – Name of the branch.</p></li>
-<li><p><strong>filename</strong> – Name of the file that where the commit history has to be stored.</p></li>
-<li><p><strong>title</strong> – Title under which the commit history has to be stored.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="changelog-generator">
+<h1>CHANGELOG Generator<a class="headerlink" href="#changelog-generator" title="Permalink to this heading">¶</a></h1>
 </section>
 <section id="module-debugger">
 <span id="debugger"></span><h1>Debugger<a class="headerlink" href="#module-debugger" title="Permalink to this heading">¶</a></h1>
@@ -248,7 +171,7 @@
     <h3><a href="#">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Welcome to Changelog Generator’s documentation!</a></li>
-<li><a class="reference internal" href="#module-generator">CHANGELOG Generator</a></li>
+<li><a class="reference internal" href="#changelog-generator">CHANGELOG Generator</a></li>
 <li><a class="reference internal" href="#module-debugger">Debugger</a></li>
 <li><a class="reference internal" href="#module-utils.rst">RST Parser</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>

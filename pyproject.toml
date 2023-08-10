@@ -1,5 +1,5 @@
 [project]
-name = "changelog-generator"
+name = "gitverse"
 dynamic = ["version"]
 description = "Python module to, generate well formatted commit notes from git commit history."
 readme = "README.md"
@@ -22,15 +22,15 @@ classifiers = [
     "Operating System :: Microsoft :: Windows :: Windows 11",
     "Topic :: Documentation :: Sphinx"
 ]
-keywords = ["changelog", "automate", "commits"]
-requires-python = ">=3.7"
+keywords = ["changelog", "automate", "commits", "releases"]
+requires-python = ">=3.8"
 dependencies = ["click"]
 
 [tool.setuptools]
-packages = ["changemaker"]
+packages = ["gitverse"]
 
 [tool.setuptools.dynamic]
-version = {attr = "changemaker.version"}
+version = {attr = "gitverse.version"}
 
 [build-system]
 requires      = ["setuptools", "wheel"]
@@ -40,11 +40,12 @@ build-backend = "setuptools.build_meta"
 dev = ["pre-commit", "xmltodict"]
 
 [project.scripts]
-changelog = "changemaker.generator:main"
+gitverse-commit = "gitverse.commits:main"
+gitverse-release = "gitverse.releases:main"
 
 [project.urls]
-Homepage = "https://github.com/thevickypedia/changelog-generator"
-Docs = "https://thevickypedia.github.io/changelog-generator/"
-Source = "https://github.com/thevickypedia/changelog-generator"
-"Bug Tracker" = "https://github.com/thevickypedia/changelog-generator/issues"
-"Release Notes" = "https://github.com/thevickypedia/changelog-generator/blob/main/release_notes.rst"
+Homepage = "https://github.com/thevickypedia/gitverse"
+Docs = "https://thevickypedia.github.io/gitverse/"
+Source = "https://github.com/thevickypedia/gitverse"
+"Bug Tracker" = "https://github.com/thevickypedia/gitverse/issues"
+"Release Notes" = "https://github.com/thevickypedia/gitverse/blob/main/release_notes.rst"

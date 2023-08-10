@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+2.0 (08/10/2023)
+----------------
+- Release v2.0
+
 2.0b (08/10/2023)
 -----------------
 - Use ``python-dotenv`` to load env vars for ``git_token``

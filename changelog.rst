@@ -1,6 +1,10 @@
 Commit History
 ==============
 
+0.3.8 (08/10/2023)
+------------------
+- Get it to a better state
+
 0.3.7 (08/10/2023)
 ------------------
 - Generate release notes based on version tags

@@ -13,6 +13,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/gitverse)](https://api.github.com/repos/thevickypedia/gitverse)
 
 # GitVerse
+Get release notes or commit history from `GitHub` and format it into `reStructuredText`/`Markdown` files.
 
 ### Installation
 ```shell
@@ -25,6 +26,9 @@ Generate release notes from releases tagged in GitHub
 ```shell
 gitverse-release
 ```
+> :bulb: Tries to get release notes, via GitHub API call.
+> If failed, uses the commit message as notes for the associated release.
+> This feature optionally takes `GIT_TOKEN` as an environment variable if it is generated for a personal repo.
 
 Generate commit history from git log
 #### Commit History

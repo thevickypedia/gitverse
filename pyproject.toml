@@ -42,6 +42,7 @@ dev = ["pre-commit", "xmltodict"]
 [project.scripts]
 gitverse-commit = "gitverse.commits:main"
 gitverse-release = "gitverse.releases:main"
+gitverse = "gitverse.help:main"
 
 [project.urls]
 Homepage = "https://github.com/thevickypedia/gitverse"

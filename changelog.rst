@@ -1,6 +1,10 @@
 Commit History
 ==============
 
+0.4.2 (08/15/2023)
+------------------
+- Add a new command for generic help
+
 0.4.1 (08/10/2023)
 ------------------
 - Reuse options via callables.py

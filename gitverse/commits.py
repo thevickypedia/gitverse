@@ -161,7 +161,7 @@ def run(branch: str, filename: str, title: str) -> NoReturn:
 @click.option("-t", "--title", help="Title under which the commit notes should be stored")
 def main(*args, reverse: str = None, debug: str = None, version: str = None,
          branch: str = None, filename: str = None, title: str = None) -> None:
-    """Generate a reStructuredText/Markdown file using github commit notes.
+    """Generate a reStructuredText/Markdown file using GitHub commit notes.
 
     Run 'gitverse-commit reverse' to generate gitverse-commit in reverse order.
 

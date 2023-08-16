@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+2.2 (08/15/2023)
+----------------
+- Add a new command for generic help
+
 2.1 (08/10/2023)
 ----------------
 - Performance improvements and more clear logging

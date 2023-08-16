@@ -179,11 +179,11 @@ def run(filename: str, title: str) -> NoReturn:
 @click.option("-e", "--env", help="Filename/filepath for .env file to load the environment variables")
 def main(*args, reverse: str = None, debug: str = None,
          version: str = None, filename: str = None, title: str = None, env: str = None) -> None:
-    """Generate a reStructuredText/Markdown file using github releases.
+    """Generate a reStructuredText/Markdown file using GitHub releases.
 
-    Run 'gitverse-commit reverse' to generate release notes in reverse order.
+    Run 'gitverse-release reverse' to generate release notes in reverse order.
 
-    Run 'gitverse-commit debug' to enable debug mode.
+    Run 'gitverse-release debug' to enable debug mode.
     """
     if version:
         debugger.info(pkg_version)

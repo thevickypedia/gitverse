@@ -1,7 +1,6 @@
 import os
 import subprocess
 import time
-from collections.abc import Generator
 from datetime import datetime
 from typing import Dict, List, NoReturn, Union
 
@@ -11,6 +10,7 @@ import requests
 
 from gitverse import debugger
 from gitverse import version as pkg_version
+from gitverse.auth_bearer import BearerAuth
 from gitverse.callables import options
 
 
@@ -22,15 +22,16 @@ def get_api_releases() -> Dict[str, List[str]]:
         Returns release notes in the form of release version and description as key-value pairs gathered via GitHub API.
     """
     gh_token = os.getenv('GIT_TOKEN') or os.getenv('git_token')
+    session = requests.Session()
     if git_config := run_git_cmd(cmd=r"git config --get remote.origin.url | sed 's/.*\/\([^ ]*\/[^.]*\).*/\1/'",
                                  raw=True):
         owner, repo_name = git_config.split('/')
-        headers = {}
         if gh_token:
-            headers['Authorization'] = f'Bearer {gh_token}'
+            debugger.info("Loading bearer auth with git token")
+            session.auth = BearerAuth(token=gh_token)
         else:
             debugger.warning("Trying to collect release notes without github token")
-        response = requests.get(f'https://api.github.com/repos/{owner}/{repo_name}/releases', headers=headers)
+        response = session.get(url=f'https://api.github.com/repos/{owner}/{repo_name}/releases')
         if response.ok:
             debugger.info("Collected release notes via GitHub API")
             try:
@@ -77,20 +78,6 @@ def get_dates() -> Dict[str, int]:
         return {line.split()[0]: int(line.split()[1]) for line in dates_values}
 
 
-def extract_numbers_from_string(input_string: str) -> Union[Generator[str], Generator[int]]:
-    """Extract numbers or floating points in a string.
-
-    Args:
-        input_string: String from which the numbers are to be extracted.
-
-    Yields:
-        Yields the string that is either a number or a dot.
-    """
-    for s in input_string:
-        if s.isdigit() or s == '.':
-            yield s
-
-
 def get_releases() -> Union[List[Dict[str, Union[str, List[str], int, str]]], None]:
     """Get releases mapped with the timestamp.
 
@@ -126,10 +113,7 @@ def get_releases() -> Union[List[Dict[str, Union[str, List[str], int, str]]], No
     # Update release notes for each version, if available via GitHub API
     if release_api := get_api_releases():
         debugger.info(f"Release notes gathered: {len(release_api)}")
-        refinery = {
-            ''.join(list(extract_numbers_from_string(input_string=key))): value
-            for key, value in release_api.items()
-        }
+        refinery = {''.join([k for k in key if k.isdigit() or k == '.']): value for key, value in release_api.items()}
         for version_update in version_updates:
             if api_description := release_api.get(version_update['version'], refinery.get(version_update['version'])):
                 version_update['description'] = api_description
@@ -152,7 +136,7 @@ def generate_snippets() -> List[str]:
         snippets = []
         for each_tag in loaded:
             # remove all character elements from the version
-            each_tag['version'] = ''.join(list(extract_numbers_from_string(input_string=each_tag['version'])))
+            each_tag['version'] = ''.join([v for v in each_tag['version'] if v.isdigit() or v == '.'])
             line1 = f"{each_tag['version']} ({each_tag['date']})"
             line2 = "-" * len(line1)
             description = []

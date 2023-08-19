@@ -1,6 +1,11 @@
 Commit History
 ==============
 
+0.4.4 (08/19/2023)
+------------------
+- Add ``BearerAuth`` object to authenticate request
+- Simply extracting version numbers
+
 0.4.3 (08/18/2023)
 ------------------
 - Extract version numbers explicitly

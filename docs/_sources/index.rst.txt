@@ -26,6 +26,13 @@ CommitHistory
    :members:
    :undoc-members:
 
+AuthBearer
+==========
+
+.. automodule:: gitverse.auth_bearer
+   :members:
+   :undoc-members:
+
 Debugger
 ========
 

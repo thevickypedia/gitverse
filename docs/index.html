@@ -61,20 +61,6 @@
 <section id="module-gitverse.releases">
 <span id="releasenotes"></span><h1>ReleaseNotes<a class="headerlink" href="#module-gitverse.releases" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="gitverse.releases.extract_numbers_from_string">
-<span class="sig-prename descclassname"><span class="pre">gitverse.releases.</span></span><span class="sig-name descname"><span class="pre">extract_numbers_from_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitverse.releases.extract_numbers_from_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extract numbers or floating points in a string.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>input_string</strong> – String from which the numbers are to be extracted.</p>
-</dd>
-<dt class="field-even">Yields<span class="colon">:</span></dt>
-<dd class="field-even"><p>Yields the string that is either a number or a dot.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="gitverse.releases.generate_snippets">
 <span class="sig-prename descclassname"><span class="pre">gitverse.releases.</span></span><span class="sig-name descname"><span class="pre">generate_snippets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#gitverse.releases.generate_snippets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate snippets based on the releases information.</p>
@@ -242,6 +228,30 @@
 </dd></dl>
 
 </section>
+<section id="module-gitverse.auth_bearer">
+<span id="authbearer"></span><h1>AuthBearer<a class="headerlink" href="#module-gitverse.auth_bearer" title="Permalink to this heading">¶</a></h1>
+<p>Module to set up bearer authentication.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">AuthBearer</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="gitverse.auth_bearer.BearerAuth">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gitverse.auth_bearer.</span></span><span class="sig-name descname"><span class="pre">BearerAuth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gitverse.auth_bearer.BearerAuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiates <code class="docutils literal notranslate"><span class="pre">BearerAuth</span></code> object.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">BearerAuth</span>
+</pre></div>
+</div>
+<p class="rubric">References</p>
+<p><a class="reference external" href="https://requests.readthedocs.io/en/latest/user/authentication/#new-forms-of-authentication">New Forms of Authentication</a></p>
+<p>Initializes the class and assign object members.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>token</strong> – Token for bearer auth.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="module-gitverse.debugger">
 <span id="debugger"></span><h1>Debugger<a class="headerlink" href="#module-gitverse.debugger" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
@@ -354,6 +364,7 @@
 <li><a class="reference internal" href="#">Welcome to GitVerse’s documentation!</a></li>
 <li><a class="reference internal" href="#module-gitverse.releases">ReleaseNotes</a></li>
 <li><a class="reference internal" href="#module-gitverse.commits">CommitHistory</a></li>
+<li><a class="reference internal" href="#module-gitverse.auth_bearer">AuthBearer</a></li>
 <li><a class="reference internal" href="#module-gitverse.debugger">Debugger</a></li>
 <li><a class="reference internal" href="#module-gitverse.utils.rst">RST Parser</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>

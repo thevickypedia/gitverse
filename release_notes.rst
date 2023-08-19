@@ -1,6 +1,11 @@
 Release Notes
 =============
 
+2.4 (08/19/2023)
+----------------
+- Improved security for API authentication
+- Includes minor simplifications
+
 2.3 (08/18/2023)
 ----------------
 - Improved accuracy on release notes mapping from git

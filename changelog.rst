@@ -1,6 +1,12 @@
 Commit History
 ==============
 
+0.4.3 (08/18/2023)
+------------------
+- Extract version numbers explicitly
+- Match tags with releases based on numbers
+- Update docs
+
 0.4.2 (08/15/2023)
 ------------------
 - Add a new command for generic help

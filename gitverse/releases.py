@@ -1,6 +1,7 @@
 import os
 import subprocess
 import time
+from collections.abc import Generator
 from datetime import datetime
 from typing import Dict, List, NoReturn, Union
 
@@ -76,6 +77,20 @@ def get_dates() -> Dict[str, int]:
         return {line.split()[0]: int(line.split()[1]) for line in dates_values}
 
 
+def extract_numbers_from_string(input_string: str) -> Union[Generator[str], Generator[int]]:
+    """Extract numbers or floating points in a string.
+
+    Args:
+        input_string: String from which the numbers are to be extracted.
+
+    Yields:
+        Yields the string that is either a number or a dot.
+    """
+    for s in input_string:
+        if s.isdigit() or s == '.':
+            yield s
+
+
 def get_releases() -> Union[List[Dict[str, Union[str, List[str], int, str]]], None]:
     """Get releases mapped with the timestamp.
 
@@ -111,8 +126,12 @@ def get_releases() -> Union[List[Dict[str, Union[str, List[str], int, str]]], No
     # Update release notes for each version, if available via GitHub API
     if release_api := get_api_releases():
         debugger.info(f"Release notes gathered: {len(release_api)}")
+        refinery = {
+            ''.join(list(extract_numbers_from_string(input_string=key))): value
+            for key, value in release_api.items()
+        }
         for version_update in version_updates:
-            if api_description := release_api.get(version_update['version']):
+            if api_description := release_api.get(version_update['version'], refinery.get(version_update['version'])):
                 version_update['description'] = api_description
     if options['reverse']:
         debugger.warning('Converting snippets to reverse order')
@@ -132,8 +151,8 @@ def generate_snippets() -> List[str]:
     if loaded := get_releases():
         snippets = []
         for each_tag in loaded:
-            if each_tag['version'].startswith('v') or each_tag['version'].startswith('V'):
-                each_tag['version'] = each_tag['version'].replace('v', '').replace('V', '')
+            # remove all character elements from the version
+            each_tag['version'] = ''.join(list(extract_numbers_from_string(input_string=each_tag['version'])))
             line1 = f"{each_tag['version']} ({each_tag['date']})"
             line2 = "-" * len(line1)
             description = []

@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+2.3 (08/18/2023)
+----------------
+- Improved accuracy on release notes mapping from git
+
 2.2 (08/15/2023)
 ----------------
 - Add a new command for generic help

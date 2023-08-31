@@ -2,7 +2,7 @@ import os
 import subprocess
 import time
 from datetime import datetime
-from typing import List, NoReturn
+from typing import List
 
 import click
 
@@ -103,7 +103,7 @@ def generator(versions: List[str], gitlog: List[str]) -> List[str]:
     return [snippet for snippet in ''.join(output).split('^^')]
 
 
-def run(branch: str, filename: str, title: str) -> NoReturn:
+def run(branch: str, filename: str, title: str) -> None:
     """Handler for generator functions that writes the commit history into a file.
 
     Args:

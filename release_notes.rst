@@ -1,45 +1,50 @@
 Release Notes
 =============
 
-2.4 (08/19/2023)
-----------------
+v2.5 (08/30/2023)
+-----------------
+- Restructure version naming in output files
+- Includes some minor modifications in type hinting
+
+v2.4 (08/19/2023)
+-----------------
 - Improved security for API authentication
 - Includes minor simplifications
 
-2.3 (08/18/2023)
-----------------
+v2.3 (08/18/2023)
+-----------------
 - Improved accuracy on release notes mapping from git
 
-2.2 (08/15/2023)
-----------------
+v2.2 (08/15/2023)
+-----------------
 - Add a new command for generic help
 
-2.1 (08/10/2023)
-----------------
+v2.1 (08/10/2023)
+-----------------
 - Performance improvements and more clear logging
 
-2.0 (08/10/2023)
-----------------
+v2.0 (08/10/2023)
+-----------------
 - Release v2.0
 
-2.0b (08/10/2023)
------------------
+v2.0b (08/10/2023)
+------------------
 - Use ``python-dotenv`` to load env vars for ``git_token``
 - Add CLI option to pass filename/filepath for dot env
 
-2.0a (08/10/2023)
------------------
+v2.0a (08/10/2023)
+------------------
 - Use ``git pull`` before any operation
 - Make an API call to github to get accurate release information (if available)
 - Improve accuracy
 
-0.7 (07/30/2023)
-----------------
+v0.7 (07/30/2023)
+-----------------
 - Add ``version`` argument
 - Set module to stable
 
-0.7b (07/30/2023)
------------------
+v0.7b (07/30/2023)
+------------------
 - Convert to ``pyproject.toml``
 - Update type hint, logging, and runtime
 

@@ -2,7 +2,7 @@ import os
 import subprocess
 import time
 from datetime import datetime
-from typing import Dict, List, NoReturn, Union
+from typing import Dict, List, Union
 
 import click
 import dotenv
@@ -135,8 +135,6 @@ def generate_snippets() -> List[str]:
     if loaded := get_releases():
         snippets = []
         for each_tag in loaded:
-            # remove all character elements from the version
-            each_tag['version'] = ''.join([v for v in each_tag['version'] if v.isdigit() or v == '.'])
             line1 = f"{each_tag['version']} ({each_tag['date']})"
             line2 = "-" * len(line1)
             description = []
@@ -151,7 +149,7 @@ def generate_snippets() -> List[str]:
         return snippets
 
 
-def run(filename: str, title: str) -> NoReturn:
+def run(filename: str, title: str) -> None:
     """Handler for generator functions that writes the release notes into a file.
 
     Args:

@@ -1,6 +1,12 @@
 Commit History
 ==============
 
+0.4.5 (08/30/2023)
+------------------
+- Set return type to None from NoReturn
+- Upgrade to latest flake8 and isort
+- Bump version
+
 0.4.4 (08/19/2023)
 ------------------
 - Add ``BearerAuth`` object to authenticate request

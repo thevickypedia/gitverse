@@ -1,6 +1,15 @@
 Release Notes
 =============
 
+2.7 (09/25/2023)
+----------------
+- Includes a bug fix to honor deleted tags in ``gitverse-release``
+
+2.6b (09/25/2023)
+-----------------
+- Implement a bug fix on honoring deleted tags
+- Release beta version
+
 2.6a (09/25/2023)
 -----------------
 - Get releases to honor deleted tags

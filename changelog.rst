@@ -1,6 +1,10 @@
 Commit History
 ==============
 
+0.4.8 (09/25/2023)
+------------------
+- Release ``v2.7``
+
 0.4.7 (09/25/2023)
 ------------------
 - Implement a bug fix on honoring deleted tags

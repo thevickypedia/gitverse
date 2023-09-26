@@ -1,6 +1,6 @@
 import click
 
-from gitverse.callables import options
+from gitverse.models.callables import options
 
 
 def debug(msg):

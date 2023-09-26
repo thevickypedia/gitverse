@@ -75,7 +75,7 @@ pre-commit run --all-files
 
 ## License & copyright
 
-&copy; Vignesh Sivanandha Rao, GitVerse
+&copy; Vignesh Rao, GitVerse
 
 Licensed under the [MIT License][license]
 

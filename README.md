@@ -13,7 +13,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/thevickypedia/gitverse)](https://api.github.com/repos/thevickypedia/gitverse)
 
 # GitVerse
-Get release notes or commit history from `GitHub` and format it into `reStructuredText`/`Markdown` files.
+Get GitHub's release notes or commit history and format it into `reStructuredText`/`Markdown` documents.
 
 ### Installation
 ```shell
@@ -75,7 +75,7 @@ pre-commit run --all-files
 
 ## License & copyright
 
-&copy; Vignesh Sivanandha Rao, GitVerse
+&copy; Vignesh Rao, GitVerse
 
 Licensed under the [MIT License][license]
 

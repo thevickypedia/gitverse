@@ -8,10 +8,10 @@ import click
 import dotenv
 import requests
 
-from gitverse import debugger
 from gitverse import version as pkg_version
-from gitverse.auth_bearer import BearerAuth
-from gitverse.callables import options
+from gitverse.models import debugger
+from gitverse.models.auth_bearer import BearerAuth
+from gitverse.models.callables import options
 
 
 def get_api_releases() -> Dict[str, List[str]]:

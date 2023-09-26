@@ -1,6 +1,14 @@
 Commit History
 ==============
 
+0.4.6 (09/25/2023)
+------------------
+- Get releases to honor deleted tags
+- Remove MANIFEST.in
+- Add dependencies to requirements.txt
+- Release alpha version
+- Restructure all dependent .py models
+
 0.4.5 (08/30/2023)
 ------------------
 - Set return type to None from NoReturn

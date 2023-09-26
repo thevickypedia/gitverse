@@ -6,9 +6,9 @@ from typing import List
 
 import click
 
-from gitverse import debugger
 from gitverse import version as pkg_version
-from gitverse.callables import options
+from gitverse.models import debugger
+from gitverse.models.callables import options
 
 
 def get_branches() -> List[str]:

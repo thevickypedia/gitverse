@@ -1,6 +1,14 @@
 Release Notes
 =============
 
+2.6a (09/25/2023)
+-----------------
+- Get releases to honor deleted tags
+- Remove MANIFEST.in
+- Add dependencies to requirements.txt
+- Release alpha version
+- Restructure all dependent .py models
+
 v2.5 (08/30/2023)
 -----------------
 - Restructure version naming in output files

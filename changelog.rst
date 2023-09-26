@@ -1,6 +1,11 @@
 Commit History
 ==============
 
+0.4.7 (09/25/2023)
+------------------
+- Implement a bug fix on honoring deleted tags
+- Release beta version
+
 0.4.6 (09/25/2023)
 ------------------
 - Get releases to honor deleted tags

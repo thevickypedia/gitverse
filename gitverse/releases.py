@@ -156,6 +156,7 @@ def run(filename: str, title: str) -> None:
         filename: Name of the file that where the release notes has to be stored.
         title: Title under which the release notes has to be stored.
     """
+    run_git_cmd(cmd="git fetch origin refs/tags/*:refs/tags/* --prune")
     run_git_cmd(cmd="git pull")
     snippets = generate_snippets()
     if not snippets:

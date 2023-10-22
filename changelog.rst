@@ -1,6 +1,11 @@
 Commit History
 ==============
 
+0.4.9 (10/22/2023)
+------------------
+- Get version number from bare ``gitverse`` command
+- Release ``v2.7.1``
+
 0.4.8 (09/25/2023)
 ------------------
 - Release ``v2.7``

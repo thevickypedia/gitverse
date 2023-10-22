@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+2.7.1 (10/22/2023)
+------------------
+- Include version number option for bare ``gitverse`` command
+
 2.7 (09/25/2023)
 ----------------
 - Includes a bug fix to honor deleted tags in ``gitverse-release``

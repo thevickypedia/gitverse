@@ -1,6 +1,11 @@
 Commit History
 ==============
 
+0.5.0 (10/22/2023)
+------------------
+- Add dependencies to dynamic in pyproject.toml
+- Release `v2.8`
+
 0.4.9 (10/22/2023)
 ------------------
 - Get version number from bare ``gitverse`` command

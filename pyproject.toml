@@ -1,6 +1,6 @@
 [project]
 name = "gitverse"
-dynamic = ["version"]
+dynamic = ["version", "dependencies"]
 description = "Get GitHub's release notes or commit history and format it into `reStructuredText`/`Markdown` documents."
 readme = "README.md"
 authors = [{ name = "Vignesh Rao", email = "svignesh1793@gmail.com" }]
@@ -21,11 +21,11 @@ requires-python = ">=3.8"
 packages = ["gitverse", "gitverse.models", "gitverse.utils"]
 
 [tool.setuptools.dynamic]
-version = {attr = "gitverse.version"}
-dependencies = {file = ["gitverse/requirements.txt"]}
+version = { attr = "gitverse.version" }
+dependencies = { file = ["gitverse/requirements.txt"] }
 
 [build-system]
-requires      = ["setuptools", "wheel"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]

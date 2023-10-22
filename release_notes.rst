@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+2.8 (10/22/2023)
+----------------
+- Bug fix when installing dependencies
+
 2.7.1 (10/22/2023)
 ------------------
 - Include version number option for bare ``gitverse`` command

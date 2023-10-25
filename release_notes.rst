@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+v2.9 (10/25/2023)
+-----------------
+- Reduces redundancy and improves reliability
+
 2.8 (10/22/2023)
 ----------------
 - Bug fix when installing dependencies

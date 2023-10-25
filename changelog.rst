@@ -1,6 +1,12 @@
 Commit History
 ==============
 
+0.5.1 (10/25/2023)
+------------------
+- Reduce redundancy in looping through `git tag`
+- Update README.md
+- Release `v2.9`
+
 0.5.0 (10/22/2023)
 ------------------
 - Add dependencies to dynamic in pyproject.toml

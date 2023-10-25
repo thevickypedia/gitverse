@@ -79,14 +79,11 @@ v0.7b (07/30/2023)
 
 0.3.1 (12/17/2022)
 ------------------
-- Make title underline consistent across any title
-- Add an optional utils package to convert rst to html/dict
+- Improve consistency in building titles for release notes
 
 0.3.0 (12/17/2022)
 ------------------
-- Add detailed log when git commands fail in debug mode
-- Set github actions to build on release tag
-- Update README.md and add more classifiers on pypi
+- Improved logging in debug mode
 
 0.2.6 (07/31/2022)
 ------------------
@@ -96,14 +93,16 @@ v0.7b (07/30/2023)
 
 0.2.5 (10/23/2021)
 ------------------
-- Add an option to generate `CHANGELOG` in reverse order
+- Add an option to generate CHANGELOG in reverse order
 - Scrap logger and use secho with colors instead
 - Abort if version is not bumped
 - Generate CHANGELOG in reverse
 
 0.2.4 (10/14/2021)
 ------------------
-- Add project urls to pypi package
+- Add project URLs to pypi package
+- Use click to make the changelog-generator to make it as a CLI tool
+- Update docstrings and README.md
 
 0.2.2 (10/14/2021)
 ------------------
@@ -119,17 +118,13 @@ v0.7b (07/30/2023)
 
 0.1.8 (08/31/2021)
 ------------------
-- Update CHANGELOG
+- Support up to 6 digit version numbers
+- Fix versions() getting called repeatedly
+- Add logger info
 
 0.1.7 (08/31/2021)
 ------------------
-- bump version to run build
-
-0.1.5 (08/31/2021)
-------------------
-- Alter time counter in destructor method
-- Update README.md, .gitignore, CHANGELOG
-- Bump version
+- Bump version to trigger build
 
 0.1.4 (08/31/2021)
 ------------------
@@ -139,8 +134,12 @@ v0.7b (07/30/2023)
 
 0.1.6 (08/31/2021)
 ------------------
-- Update CHANGELOG
+- Update sample code in README.md
+- Bump version to 0.1.6
 
 0.0.1 (08/31/2021)
 ------------------
-- Update CHANGELOG
+- Onboard to pypi
+- Create a pypi package
+- Move generator.py within a source directory
+- Add __init__.py, CHANGELOT, LICENSE, MANIFEST.in, setup.cfg, setup.py, version.py

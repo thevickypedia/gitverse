@@ -70,32 +70,45 @@
 </pre></div>
 </div>
 <blockquote>
-<div><p>:bulb: Tries to get release notes, via GitHub API call.
-If failed, uses the commit message as notes for the associated release.
-This feature optionally takes <code class="docutils literal notranslate"><span class="pre">GIT_TOKEN</span></code> as an environment variable if it is generated for a personal repo.</p>
+<div><p>Tries to get release notes, using GitHub API<br>
+If failed, uses the commit message as notes for the associated release<br>
+This feature optionally takes <code class="docutils literal notranslate"><span class="pre">GIT_TOKEN</span></code> as an environment variable if it is generated for a personal repo<br></p>
 </div></blockquote>
-<p>Generate commit history from git log</p>
-</section>
+<details>
+<summary><strong>Known issue related to the order of release notes</strong></summary><ul class="simple">
+<li><p>There is a known issue with GitHub where the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span></code> command returns incorrect timestamp <em>(when tags are created in different timezones)</em></p></li>
+<li><p>If the release notes are not generated in the expected order, please run the following command to verify</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span><span class="k">for</span>-each-ref<span class="w"> </span>--sort<span class="o">=</span><span class="s1">&#39;-creatordate&#39;</span><span class="w"> </span>--format<span class="w"> </span><span class="s1">&#39;%(refname:short) %(creatordate:iso8601)&#39;</span><span class="w"> </span>refs/tags
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If the output is in expected order, please raise an <a class="reference external" href="https://github.com/thevickypedia/gitverse/issues/new">issue</a></p></li>
+</ul>
+</details></section>
+<hr class="docutils" />
 <section id="commit-history">
 <h3>Commit History<a class="headerlink" href="#commit-history" title="Permalink to this heading">¶</a></h3>
+<p>Generate commit history from git log</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>gitverse-commit
 </pre></div>
 </div>
+</section>
+<hr class="docutils" />
 <section id="options">
-<h4>Options<a class="headerlink" href="#options" title="Permalink to this heading">¶</a></h4>
+<h3>Options<a class="headerlink" href="#options" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">debug</span></code> - Enable debug mode for logging.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">reverse</span></code> - Generate commit history/release notes in reverse order.</p></li>
 </ul>
 </section>
 <section id="flags">
-<h4>Flags<a class="headerlink" href="#flags" title="Permalink to this heading">¶</a></h4>
+<h3>Flags<a class="headerlink" href="#flags" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-b</span></code> Gather commit notes specific to a branch. Uses <code class="docutils literal notranslate"><span class="pre">Default</span> <span class="pre">branch</span></code> if not passed. (Only for <code class="docutils literal notranslate"><span class="pre">gitverse-commit</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code> Write the commit notes to a custom filename.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-t</span></code> Title or index line for the file generated.</p></li>
 </ul>
-</section>
 </section>
 <section id="sample">
 <h3>Sample<a class="headerlink" href="#sample" title="Permalink to this heading">¶</a></h3>
@@ -146,11 +159,9 @@ This feature optionally takes <code class="docutils literal notranslate"><span c
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#usage">Usage</a><ul>
 <li><a class="reference internal" href="#release-notes-tags">Release Notes (Tags)</a></li>
-<li><a class="reference internal" href="#commit-history">Commit History</a><ul>
+<li><a class="reference internal" href="#commit-history">Commit History</a></li>
 <li><a class="reference internal" href="#options">Options</a></li>
 <li><a class="reference internal" href="#flags">Flags</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#sample">Sample</a></li>
 </ul>
 </li>

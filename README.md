@@ -26,21 +26,37 @@ Generate release notes from releases tagged in GitHub
 ```shell
 gitverse-release
 ```
-> :bulb: Tries to get release notes, via GitHub API call.
-> If failed, uses the commit message as notes for the associated release.
-> This feature optionally takes `GIT_TOKEN` as an environment variable if it is generated for a personal repo.
 
-Generate commit history from git log
+> Tries to get release notes, using GitHub API<br>
+> If failed, uses the commit message as notes for the associated release<br>
+> This feature optionally takes `GIT_TOKEN` as an environment variable if it is generated for a personal repo<br>
+
+<details>
+<summary><strong>Known issue related to the order of release notes</strong></summary>
+
+- There is a known issue with GitHub where the `git tag` command returns incorrect timestamp _(when tags are created in different timezones)_
+- If the release notes are not generated in the expected order, please run the following command to verify
+```shell
+git for-each-ref --sort='-creatordate' --format '%(refname:short) %(creatordate:iso8601)' refs/tags
+```
+- If the output is in expected order, please raise an [issue](https://github.com/thevickypedia/gitverse/issues/new)
+</details>
+
+---
+
 #### Commit History
+Generate commit history from git log
 ```shell
 gitverse-commit
 ```
 
-##### Options
+---
+
+#### Options
 - `debug` - Enable debug mode for logging.
 - `reverse` - Generate commit history/release notes in reverse order.
 
-##### Flags
+#### Flags
 - `-b` Gather commit notes specific to a branch. Uses `Default branch` if not passed. (Only for `gitverse-commit`)
 - `-f` Write the commit notes to a custom filename.
 - `-t` Title or index line for the file generated.

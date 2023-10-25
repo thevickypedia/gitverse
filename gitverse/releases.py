@@ -1,6 +1,8 @@
 import os
 import subprocess
 import time
+import warnings
+from collections.abc import Generator
 from datetime import datetime
 from typing import Dict, List, Union
 
@@ -65,17 +67,30 @@ def run_git_cmd(cmd: str, raw: bool = False) -> Union[str, List[str]]:
             debugger.error(error)
 
 
-def get_dates() -> Dict[str, int]:
-    """Get timestamp for each release.
+def get_tags() -> Generator[Dict[str, Union[str, int, List[str]]]]:
+    """Get all tags for repo and create a dictionary by iterating over each tag for it's subject.
 
-    Returns:
+    Yields:
         Dict[str, int]:
-        Returns the release version and the timestamp as key-value pairs.
+        Yields the release version, description, timestamp and the date for each tag.
     """
-    if dates_values := run_git_cmd(
-            cmd='git tag --format "%(refname:short) %(creatordate:format:%s)"'
-    ):
-        return {line.split()[0]: int(line.split()[1]) for line in dates_values}
+    # Alternate: git for-each-ref --sort='-creatordate' --format '%(refname:short) %(creatordate:iso8601)' refs/tags
+    if dates_values := run_git_cmd(cmd='git tag --format "%(refname:short)||%(creatordate:format:%s)"'):
+        for line in dates_values:
+            tag_line = line.split('||')
+            tag_name = tag_line[0]
+            timestamp = int(tag_line[1])
+            if notes := run_git_cmd(cmd=f'git tag -l -n99 {tag_name}', raw=True):
+                yield dict(
+                    version=tag_name,
+                    description=[v.strip() for v in notes.lstrip(tag_name).splitlines()],
+                    timestamp=timestamp,
+                    date=datetime.fromtimestamp(timestamp).strftime("%m/%d/%Y")
+                )
+            else:
+                raise ValueError(f"Failed to get release notes for the tag {tag_name}")
+    else:
+        raise ValueError("Failed to get tags information")
 
 
 def get_releases() -> Union[List[Dict[str, Union[str, List[str], int, str]]], None]:
@@ -85,43 +100,25 @@ def get_releases() -> Union[List[Dict[str, Union[str, List[str], int, str]]], No
         Union[List[Dict[str, Union[str, List[str], int, str]]], None]:
         Returns all the releases information as list of dictionaries.
     """
-    dates = get_dates()
-    tags = run_git_cmd(cmd='git tag -l -n99')
-    if not dates:
-        debugger.error("Failed to fetch dates information.")
+    try:
+        tags = list(get_tags())
+    except ValueError as error:
+        debugger.error(error.__str__())
         return
-    if not tags:
-        debugger.error("Failed to fetch tags information.")
-        return
-    current_version = None
-    version_updates = {}
-    for tag in tags:
-        if tag.split()[0] in dates.keys():
-            current_version = tag.split()[0]
-            version_updates[current_version] = {
-                "version": current_version,
-                "description": [' '.join(tag.split()[1:])],
-                "timestamp": dates[current_version],
-                "date": datetime.fromtimestamp(dates[current_version]).strftime("%m/%d/%Y")
-            }
-        elif current_version:
-            version_updates[current_version]['description'].append(tag.strip())  # adds next line to previous desc
-    version_updates = list(version_updates.values())
-    debugger.info(f"Git tags gathered: {len(version_updates)}")
-    if len(version_updates) != len(dates):
-        debugger.error("Git tag has a conflict with the number of tags and dates present.")
+    debugger.info(f"Git tags gathered: {len(tags)}")
     # Update release notes for each version, if available via GitHub API
     if release_api := get_api_releases():
         debugger.info(f"Release notes gathered: {len(release_api)}")
-        refinery = {''.join([k for k in key if k.isdigit() or k == '.']): value for key, value in release_api.items()}
-        for version_update in version_updates:
-            if api_description := release_api.get(version_update['version'], refinery.get(version_update['version'])):
-                version_update['description'] = api_description
+        for tag in tags:
+            if api_description := release_api.get(tag['version']):
+                tag['description'] = api_description
+            else:
+                debugger.warning(f"{tag['version']} could not be found in releases")
     if options['reverse']:
         debugger.warning('Converting snippets to reverse order')
-        version_updates = sorted(version_updates, key=lambda x: x['timestamp'], reverse=True)
+        version_updates = sorted(tags, key=lambda x: x['timestamp'], reverse=True)
     else:
-        version_updates = sorted(version_updates, key=lambda x: x['timestamp'])
+        version_updates = sorted(tags, key=lambda x: x['timestamp'])
     return version_updates
 
 

@@ -1,6 +1,14 @@
 Commit History
 ==============
 
+0.5.3 (11/30/2023)
+------------------
+- Support hyperlinks for restructured text file format
+
+0.5.2 (10/25/2023)
+------------------
+- Update release_notes.rst and cleanup
+
 0.5.1 (10/25/2023)
 ------------------
 - Reduce redundancy in looping through `git tag`
@@ -36,6 +44,7 @@ Commit History
 
 0.4.5 (08/30/2023)
 ------------------
+- Restructure version naming in output files
 - Set return type to None from NoReturn
 - Upgrade to latest flake8 and isort
 - Bump version

@@ -12,7 +12,7 @@ import requests
 from gitverse import version as pkg_version
 from gitverse.models import debugger
 from gitverse.models.auth_bearer import BearerAuth
-from gitverse.models.callables import options
+from gitverse.models.callables import md_link_pattern, options
 
 
 def get_api_releases() -> Dict[str, List[str]]:
@@ -135,6 +135,8 @@ def generate_snippets() -> List[str]:
             line2 = "-" * len(line1)
             description = []
             for desc in each_tag['description']:
+                if options['ext'] == '.rst':
+                    desc = md_link_pattern.sub(r'`\1 <\2>`_', desc)
                 if desc.startswith('-'):
                     description.append(desc)
                 else:
@@ -209,11 +211,18 @@ def main(*args, reverse: str = None, debug: str = None,
         return
 
     if filename is None:
-        filename = 'ReleaseNotes'
+        filename = 'release_notes.md'
     if title is None:
         title = 'Release Notes'
     if env is None:
         env = '.env'
+
+    name, extension = os.path.splitext(filename.lower())
+    if name and extension in ('.rst', '.md'):
+        options['ext'] = extension
+    else:
+        debugger.info("Module generates the notes in markdown or restructured text format")
+        debugger.warning(f"Using {filename!r} may render unexpected format")
     kwargs = dict(dotenv_path=env, override=True, verbose=False)
     if options['debug']:
         kwargs['verbose'] = True

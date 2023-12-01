@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+v3.0 (11/30/2023)
+-----------------
+- Support hyperlinks for restructured text file format
+
 v2.9 (10/25/2023)
 -----------------
 - Reduces redundancy and improves reliability

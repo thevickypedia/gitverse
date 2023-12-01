@@ -1,6 +1,10 @@
 Commit History
 ==============
 
+0.5.5 (12/01/2023)
+------------------
+- Extend module support up to 10,000 releases
+
 0.5.4 (12/01/2023)
 ------------------
 - Reduce redundancy, improve runtime

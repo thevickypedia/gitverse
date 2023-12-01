@@ -1,6 +1,10 @@
 Release Notes
 =============
 
+v3.2 (12/01/2023)
+-----------------
+- Includes support up to 10,000 releases (previously 30)
+
 v3.1 (12/01/2023)
 -----------------
 - Reduces redundant code and improves runtime

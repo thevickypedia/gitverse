@@ -15,12 +15,12 @@ from gitverse.models.auth_bearer import BearerAuth
 from gitverse.models.callables import md_link_pattern, options
 
 
-def get_api_releases() -> Dict[str, List[str]]:
+def get_api_releases() -> Generator[Dict[str, List[str]]]:
     """Get release notes via git api.
 
-    Returns:
-        Dict[str, List[str]]:
-        Returns release notes in the form of release version and description as key-value pairs gathered via GitHub API.
+    Yields:
+        Generator[Dict[str, List[str]]]:
+        Yields release notes in the form of release version and description as key-value pairs gathered via GitHub API.
     """
     gh_token = os.getenv('GIT_TOKEN') or os.getenv('git_token')
     session = requests.Session()
@@ -31,15 +31,25 @@ def get_api_releases() -> Dict[str, List[str]]:
             session.auth = BearerAuth(token=gh_token)
         else:
             debugger.warning("Trying to collect release notes without github token")
-        response = session.get(url=f'https://api.github.com/repos/{owner}/{repo_name}/releases')
-        if response.ok:
-            debugger.info("Collected release notes via GitHub API")
-            try:
-                return {resp['name']: resp['body'].splitlines() for resp in response.json()}
-            except requests.JSONDecodeError as error:
-                debugger.error(error)
-        else:
-            debugger.error(f"{response.status_code} - {response.text}")
+        page_num = 0
+        # 100 pages with 100 releases per page, should cover up to 10_000 releases
+        while page_num <= 100:
+            page_num += 1
+            response = session.get(url=f'https://api.github.com/repos/{owner}/{repo_name}/releases',
+                                   params={'per_page': 100, 'page': page_num})
+            if response.ok:
+                response_json = response.json()
+                if not response_json:
+                    debugger.debug(f"Page {page_num} returned {response_json}, assuming end of releases.")
+                    break
+                debugger.info(f"Collected release notes on page {page_num} via GitHub API")
+                try:
+                    yield {resp['name']: resp['body'].splitlines() for resp in response_json}
+                except requests.JSONDecodeError as error:
+                    debugger.error(error)
+            else:
+                debugger.error(f"{response.status_code} - {response.text}")
+                break
 
 
 def run_git_cmd(cmd: str) -> str:
@@ -103,13 +113,15 @@ def get_releases() -> Union[List[Dict[str, Union[str, List[str], int, str]]], No
         return
     debugger.info(f"Git tags gathered: {len(tags)}")
     # Update release notes for each version, if available via GitHub API
-    if release_api := get_api_releases():
-        debugger.info(f"Release notes gathered: {len(release_api)}")
+    n = 0
+    for release_api in get_api_releases():
+        n = len(release_api)
         for tag in tags:
             if api_description := release_api.get(tag['version']):
                 tag['description'] = api_description
             else:
-                debugger.warning(f"{tag['version']} could not be found in releases")
+                debugger.warning(f"{tag['version']} is either missing or doesn't have release notes")
+    debugger.info(f"Release notes gathered: {n}")
     if options['reverse']:
         debugger.warning('Converting snippets to reverse order')
         version_updates = sorted(tags, key=lambda x: x['timestamp'], reverse=True)

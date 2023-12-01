@@ -231,8 +231,8 @@ def main(*args, reverse: str = None, debug: str = None,
     if name and extension in ('.rst', '.md'):
         options['ext'] = extension
     else:
-        debugger.info("Module generates the notes in markdown or restructured text format")
-        debugger.warning(f"Using {filename!r} may render unexpected format")
+        debugger.info("Release notes are generated to support '.rst' or '.md' format", True)
+        debugger.warning(f"Using {filename!r} may render unexpected format", True)
     kwargs = dict(dotenv_path=env, override=True, verbose=False)
     if options['debug']:
         kwargs['verbose'] = True

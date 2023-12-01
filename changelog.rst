@@ -1,6 +1,10 @@
 Commit History
 ==============
 
+0.5.6 (12/01/2023)
+------------------
+- Override `debug` flag to print warning message about file format
+
 0.5.5 (12/01/2023)
 ------------------
 - Extend module support up to 10,000 releases

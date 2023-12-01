@@ -1,6 +1,13 @@
 Commit History
 ==============
 
+0.5.4 (12/01/2023)
+------------------
+- Reduce redundancy, improve runtime
+- Suppress onscreen rejection messages while pruning
+- Print onscreen runtime message regardless of debug flag
+- Fix broken sections of the runbook
+
 0.5.3 (11/30/2023)
 ------------------
 - Support hyperlinks for restructured text file format

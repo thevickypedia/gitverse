@@ -29,14 +29,14 @@ CommitHistory
 AuthBearer
 ==========
 
-.. automodule:: gitverse.auth_bearer
+.. automodule:: gitverse.models.auth_bearer
    :members:
    :undoc-members:
 
 Debugger
 ========
 
-.. automodule:: gitverse.debugger
+.. automodule:: gitverse.models.debugger
    :members:
    :undoc-members:
 

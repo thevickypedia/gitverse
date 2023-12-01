@@ -1,6 +1,12 @@
 Release Notes
 =============
 
+v3.1 (12/01/2023)
+-----------------
+- Reduces redundant code and improves runtime
+- Prints runtime on screen regardless of ``debug`` flag
+- Hides unwanted messages while running ``git`` CLI commands
+
 v3.0 (11/30/2023)
 -----------------
 - Support hyperlinks for restructured text file format

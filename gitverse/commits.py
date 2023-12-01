@@ -19,9 +19,8 @@ def get_branches() -> List[str]:
         Returns a list of branches available.
     """
     try:
-        branches = subprocess.check_output("git branch",
-                                           shell=True).decode(encoding='UTF-8').replace('* ', '').strip().splitlines()
-        return branches
+        return subprocess.check_output("git branch", stderr=subprocess.DEVNULL,
+                                       shell=True).decode(encoding='UTF-8').replace('* ', '').strip().splitlines()
     except (subprocess.CalledProcessError, subprocess.SubprocessError, Exception) as error:
         if isinstance(error, subprocess.CalledProcessError):
             result = error.output.decode(encoding='UTF-8').strip()
@@ -41,7 +40,7 @@ def get_gitlog(branch: str) -> List[str]:
         Returns the output of gitlog as a list.
     """
     try:
-        return subprocess.check_output(f'git log --no-merges --reverse {branch}',
+        return subprocess.check_output(f'git log --no-merges --reverse {branch}', stderr=subprocess.DEVNULL,
                                        shell=True).decode(encoding='UTF-8').splitlines()
     except (subprocess.CalledProcessError, subprocess.SubprocessError, Exception) as error:
         if isinstance(error, subprocess.CalledProcessError):
@@ -62,7 +61,7 @@ def get_commits(trunk: str) -> int:
         Number of commits.
     """
     try:
-        commits = int(subprocess.check_output(f"git rev-list --count {trunk}",
+        commits = int(subprocess.check_output(f"git rev-list --count {trunk}", stderr=subprocess.DEVNULL,
                                               shell=True).decode('utf-8').splitlines()[0])
         debugger.info(f'Number of commits: {commits}')
         return commits
@@ -148,7 +147,7 @@ def run(branch: str, filename: str, title: str) -> None:
         file.write('%s\n%s\n\n' % (title, '=' * len(title)))
         for index, each_snippet in enumerate(snippets):
             file.write(f'{each_snippet}\n' if index + 1 < len(snippets) else each_snippet)
-    debugger.info(f"{filename!r} was created in: {round(float(time.time() - options['start']), 2)}s")
+    debugger.info(f"{filename!r} was generated in: {round(float(time.time() - options['start']), 2)}s", True)
 
 
 @click.command()

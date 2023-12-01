@@ -24,8 +24,7 @@ def get_api_releases() -> Dict[str, List[str]]:
     """
     gh_token = os.getenv('GIT_TOKEN') or os.getenv('git_token')
     session = requests.Session()
-    if git_config := run_git_cmd(cmd=r"git config --get remote.origin.url | sed 's/.*\/\([^ ]*\/[^.]*\).*/\1/'",
-                                 raw=True):
+    if git_config := run_git_cmd(r"git config --get remote.origin.url | sed 's/.*\/\([^ ]*\/[^.]*\).*/\1/'"):
         owner, repo_name = git_config.split('/')
         if gh_token:
             debugger.info("Loading bearer auth with git token")
@@ -43,7 +42,7 @@ def get_api_releases() -> Dict[str, List[str]]:
             debugger.error(f"{response.status_code} - {response.text}")
 
 
-def run_git_cmd(cmd: str, raw: bool = False) -> Union[str, List[str]]:
+def run_git_cmd(cmd: str) -> str:
     """Run the git command.
 
     Args:
@@ -54,10 +53,7 @@ def run_git_cmd(cmd: str, raw: bool = False) -> Union[str, List[str]]:
         Returns the output of the git command split by lines.
     """
     try:
-        output = subprocess.check_output(cmd, shell=True).decode(encoding='UTF-8').strip()
-        if raw:
-            return output
-        return output.splitlines()
+        return subprocess.check_output(cmd, shell=True, stderr=subprocess.DEVNULL).decode(encoding='UTF-8').strip()
     except (subprocess.CalledProcessError, subprocess.SubprocessError, Exception) as error:
         if isinstance(error, subprocess.CalledProcessError):
             result = error.output.decode(encoding='UTF-8').strip()
@@ -74,12 +70,13 @@ def get_tags() -> Generator[Dict[str, Union[str, int, List[str]]]]:
         Yields the release version, description, timestamp and the date for each tag.
     """
     # Alternate: git for-each-ref --sort='-creatordate' --format '%(refname:short) %(creatordate:iso8601)' refs/tags
-    if dates_values := run_git_cmd(cmd='git tag --format "%(refname:short)||%(creatordate:format:%s)"'):
+    if dates_values := run_git_cmd('git tag --format "%(refname:short)||%(creatordate:format:%s)"'):
+        dates_values = dates_values.splitlines()
         for line in dates_values:
             tag_line = line.split('||')
             tag_name = tag_line[0]
             timestamp = int(tag_line[1])
-            if notes := run_git_cmd(cmd=f'git tag -l -n99 {tag_name}', raw=True):
+            if notes := run_git_cmd(f'git tag -l -n99 {tag_name}'):
                 yield dict(
                     version=tag_name,
                     description=[v.strip() for v in notes.lstrip(tag_name).splitlines()],
@@ -135,13 +132,14 @@ def generate_snippets() -> List[str]:
             line2 = "-" * len(line1)
             description = []
             for desc in each_tag['description']:
-                if options['ext'] == '.rst':
-                    desc = md_link_pattern.sub(r'`\1 <\2>`_', desc)
                 if desc.startswith('-'):
                     description.append(desc)
                 else:
                     description.append('- ' + desc)
-            line3 = "\n".join(description)
+            if options['ext'] == '.rst':
+                line3 = md_link_pattern.sub(r'`\1 <\2>`_', '\n'.join(description))
+            else:
+                line3 = '\n'.join(description)
             line = line1 + "\n" + line2 + "\n" + line3 + "\n"
             snippets.append(line)
         return snippets
@@ -166,7 +164,7 @@ def run(filename: str, title: str) -> None:
         file.write('%s\n%s\n\n' % (title, '=' * len(title)))
         for index, each_snippet in enumerate(snippets):
             file.write(f'{each_snippet}\n' if index + 1 < len(snippets) else each_snippet)
-    debugger.info(f"{filename!r} was created in: {round(float(time.time() - options['start']), 2)}s")
+    debugger.info(f"{filename!r} was generated in: {round(float(time.time() - options['start']), 2)}s", True)
 
 
 @click.command()

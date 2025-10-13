@@ -1,6 +1,11 @@
 Release Notes
 =============
 
+v3.3 (10/13/2025)
+-----------------
+- Fix failing on release notes being ``null``
+- Override debug flag to print warning message about file format
+
 v3.2 (12/01/2023)
 -----------------
 - Includes support up to 10,000 releases (previously 30)

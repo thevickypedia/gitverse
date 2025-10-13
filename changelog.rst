@@ -1,6 +1,10 @@
 Commit History
 ==============
 
+0.6.2 (10/13/2025)
+------------------
+- Fix missing version info in release notes' auto updater workflow
+
 0.6.1 (10/13/2025)
 ------------------
 - Release ``v3.3``

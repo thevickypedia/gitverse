@@ -28,5 +28,5 @@ jobs:
         uses: thevickypedia/update-release-notes@v2
         with:
           git_token: ${{ secrets.GIT_TOKEN }}
-          commit_message: "Update release notes for v${{ inputs.project_version }}"
+          commit_message: "Update release notes for ${{ env.PROJECT_VERSION }}"
           filename: release_notes.rst

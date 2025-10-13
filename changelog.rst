@@ -1,6 +1,22 @@
 Commit History
 ==============
 
+0.6.1 (10/13/2025)
+------------------
+- Release ``v3.3``
+
+0.6.0 (10/13/2025)
+------------------
+- Create a new GH workflow to auto-update release notes
+
+0.5.9 (10/13/2025)
+------------------
+- Update pypi-publisher workflow
+
+0.5.8 (10/13/2025)
+------------------
+- Fix missing release notes in GH releases
+
 0.5.7 (04/09/2024)
 ------------------
 - Set all GH actions to use `self-hosted` runners

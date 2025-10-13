@@ -1,6 +1,10 @@
 Commit History
 ==============
 
+0.5.7 (04/09/2024)
+------------------
+- Set all GH actions to use `self-hosted` runners
+
 0.5.6 (12/01/2023)
 ------------------
 - Override `debug` flag to print warning message about file format

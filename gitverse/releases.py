@@ -44,7 +44,7 @@ def get_api_releases() -> Generator[Dict[str, List[str]]]:
                     break
                 debugger.info(f"Collected release notes on page {page_num} via GitHub API")
                 try:
-                    yield {resp['name']: resp['body'].splitlines() for resp in response_json}
+                    yield {resp['name']: resp.get('body').splitlines() for resp in response_json}
                 except requests.JSONDecodeError as error:
                     debugger.error(error)
             else:
